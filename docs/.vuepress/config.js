@@ -5,7 +5,7 @@ const guideRoute = routeLayout("../guide")
 
 module.exports = {
     title: 'Hello VuePress',
-	base: './',
+	base: '/note/',
     description: 'Just playing around',
 
     themeConfig: {
