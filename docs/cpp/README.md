@@ -1,6 +1,6 @@
 # C++ 继承
 
-![美女图片-1629700315.5142295](./assets/美女图片-1629700315.5142295-1713543319699-6.jpg)
+ ![美女图片-1629700281.5043328](https://raw.githubusercontent.com/heihei180/temp_file/file/picgo/%E7%BE%8E%E5%A5%B3%E5%9B%BE%E7%89%87-1629700281.5043328.jpg)
 
 
 
