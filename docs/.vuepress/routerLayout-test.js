@@ -6,11 +6,11 @@ function resolve(dir) {
 }
 
 function getDirectoryTreeSync(dirPath, parentDir = "") {
-    console.log("file path:", dirPath); // 打印传入的路径
+    // console.log("file path:", dirPath); // 打印传入的路径
     const tempPath = resolve(dirPath);
     if (parentDir.trim().length === 0)
         parentDir = path.join("/",path.basename(tempPath), "/")
-    console.log("temp Path:", tempPath); // 打印解析后的绝对路径
+    // console.log("temp Path:", tempPath); // 打印解析后的绝对路径
 
     const files = fs.readdirSync(tempPath);
     const children = files
@@ -47,7 +47,7 @@ function getDirectoryTreeSync(dirPath, parentDir = "") {
 
             }
         })
-        .filter((item) => item !== undefined);
+        .filter((item) => item !==null && item !== undefined);
 
 
     // 如果没有子目录或文件，返回null
@@ -69,7 +69,9 @@ function buildTree(dir) {
     // let result = getDirectoryTreeSync(dir);
     // console.log("====== result =====", result);
     // 不想再改了，js 实在不行，就这么办吧
-    return [getDirectoryTreeSync(dir)][0]?.children;
+    let children =  [getDirectoryTreeSync(dir)][0]?.children
+    // console.log(children)
+    return children
 }
 
 buildTree("../guide");
