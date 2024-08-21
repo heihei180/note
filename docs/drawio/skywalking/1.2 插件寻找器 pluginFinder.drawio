@@ -1,0 +1,114 @@
+<mxfile host="Electron" modified="2024-08-07T09:48:31.846Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.6.1 Chrome/124.0.6367.207 Electron/30.0.6 Safari/537.36" etag="CydxFRAkEgcEGEZ2N1nC" version="24.6.1" type="device">
+  <diagram name="第 1 页" id="3_AYBHBxKLHgXcp4mOLv">
+    <mxGraphModel dx="1861" dy="1781" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="_ErbszUaglMlhtpiHv44-3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="_ErbszUaglMlhtpiHv44-1" target="_ErbszUaglMlhtpiHv44-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_ErbszUaglMlhtpiHv44-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="_ErbszUaglMlhtpiHv44-1" target="_ErbszUaglMlhtpiHv44-24">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_ErbszUaglMlhtpiHv44-26" value="读取插件、委托给pluginFinder 管理" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="_ErbszUaglMlhtpiHv44-25">
+          <mxGeometry x="0.2893" y="2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_ErbszUaglMlhtpiHv44-1" value="1. 插件引导器&lt;div&gt;&lt;div style=&quot;background-color:#2b2b2b;color:#a9b7c6&quot;&gt;&lt;pre style=&quot;font-family:&#39;JetBrains Mono&#39;,monospace;font-size:12.0pt;&quot;&gt;PluginBootstrap&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="310" y="110" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="_ErbszUaglMlhtpiHv44-5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="_ErbszUaglMlhtpiHv44-2" target="_ErbszUaglMlhtpiHv44-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_ErbszUaglMlhtpiHv44-2" value="加载所有插件" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="310" y="280" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="_ErbszUaglMlhtpiHv44-7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="_ErbszUaglMlhtpiHv44-4" target="_ErbszUaglMlhtpiHv44-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_ErbszUaglMlhtpiHv44-4" value="PluginBootstrap#loadPlugins" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="310" y="420" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="_ErbszUaglMlhtpiHv44-9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="_ErbszUaglMlhtpiHv44-6" target="_ErbszUaglMlhtpiHv44-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_ErbszUaglMlhtpiHv44-6" value="涉及到类加载器的知识" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="285" y="560" width="170" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="_ErbszUaglMlhtpiHv44-11" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="_ErbszUaglMlhtpiHv44-8" target="_ErbszUaglMlhtpiHv44-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_ErbszUaglMlhtpiHv44-13" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="_ErbszUaglMlhtpiHv44-8" target="_ErbszUaglMlhtpiHv44-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_ErbszUaglMlhtpiHv44-8" value="创建自己 的类加载器AgentClassLoader" style="whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="310" y="700" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="_ErbszUaglMlhtpiHv44-15" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="_ErbszUaglMlhtpiHv44-10" target="_ErbszUaglMlhtpiHv44-14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_ErbszUaglMlhtpiHv44-10" value="注意&amp;nbsp; 这个类加载器破环了双亲委派机制，只从自己的插件目录去加载类，实现了插件目录的自定义" style="whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="517" y="675" width="310" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="_ErbszUaglMlhtpiHv44-17" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="_ErbszUaglMlhtpiHv44-12" target="_ErbszUaglMlhtpiHv44-16">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_ErbszUaglMlhtpiHv44-12" value="读取所有def 文件&lt;div&gt;skywalking-plugin.def&lt;/div&gt;&lt;div&gt;这配置文件声明了sw的默认配置&lt;/div&gt;" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="310" y="840" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="_ErbszUaglMlhtpiHv44-14" value="实现了如何扫描jar包，读取jar 内容、将jar中内容加载为 class" style="whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="612" y="890" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="_ErbszUaglMlhtpiHv44-19" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="_ErbszUaglMlhtpiHv44-16" target="_ErbszUaglMlhtpiHv44-18">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_ErbszUaglMlhtpiHv44-21" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="_ErbszUaglMlhtpiHv44-16" target="_ErbszUaglMlhtpiHv44-20">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_ErbszUaglMlhtpiHv44-16" value="将所有配置的对象，都保存起来" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="310" y="980" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="_ErbszUaglMlhtpiHv44-18" value="kv方式&lt;div&gt;插件名：插件类&lt;/div&gt;" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="510" y="980" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="_ErbszUaglMlhtpiHv44-23" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="_ErbszUaglMlhtpiHv44-20" target="_ErbszUaglMlhtpiHv44-22">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_ErbszUaglMlhtpiHv44-20" value="实例化这些 插件对象&lt;div&gt;AbstractClassEnhancePluginDefine&lt;br&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="310" y="1120" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="_ErbszUaglMlhtpiHv44-22" value="动态插件加载器、、、暂时无" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="310" y="1260" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="_ErbszUaglMlhtpiHv44-28" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="_ErbszUaglMlhtpiHv44-24" target="_ErbszUaglMlhtpiHv44-27">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_ErbszUaglMlhtpiHv44-24" value="pluginFinder&lt;div&gt;插件如何匹配&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-110" y="120" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="_ErbszUaglMlhtpiHv44-31" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="_ErbszUaglMlhtpiHv44-27" target="_ErbszUaglMlhtpiHv44-30">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_ErbszUaglMlhtpiHv44-27" value="将所有的插件进行分类" style="whiteSpace=wrap;html=1;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="-110" y="260" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="_ErbszUaglMlhtpiHv44-30" value="&amp;nbsp;&lt;span style=&quot;background-color: initial;&quot;&gt;根据类名匹配： nameMatch&lt;/span&gt;&lt;div&gt;根据签名匹配： 根据唯一匹配，大概是类名+函数名&lt;/div&gt;&lt;div&gt;是否是引导器类： 放一些jdk自己提供的类，进行增强&lt;/div&gt;" style="whiteSpace=wrap;html=1;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="-360" y="227.5" width="180" height="125" as="geometry" />
+        </mxCell>
+        <mxCell id="_ErbszUaglMlhtpiHv44-33" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="_ErbszUaglMlhtpiHv44-32" target="_ErbszUaglMlhtpiHv44-24">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_ErbszUaglMlhtpiHv44-32" value="核心" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-110" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="_ErbszUaglMlhtpiHv44-35" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="_ErbszUaglMlhtpiHv44-34" target="_ErbszUaglMlhtpiHv44-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_ErbszUaglMlhtpiHv44-34" value="如何加载插件、寻找插件" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="310" y="-40" width="120" height="80" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

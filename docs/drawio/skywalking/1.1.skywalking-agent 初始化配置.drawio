@@ -1,0 +1,115 @@
+<mxfile host="Electron" modified="2024-08-07T09:12:16.156Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.6.1 Chrome/124.0.6367.207 Electron/30.0.6 Safari/537.36" etag="0qDuRQT2iV-RRsvrKKKQ" version="24.6.1" type="device">
+  <diagram name="第 1 页" id="GqfJgFzbki4jLJJ_5YvJ">
+    <mxGraphModel dx="1036" dy="614" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="wW_zlxKJsFNERpX6SJG5-3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="wW_zlxKJsFNERpX6SJG5-1" target="wW_zlxKJsFNERpX6SJG5-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="wW_zlxKJsFNERpX6SJG5-1" value="初始化agent配置" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="320" y="100" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="wW_zlxKJsFNERpX6SJG5-5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="wW_zlxKJsFNERpX6SJG5-2" target="wW_zlxKJsFNERpX6SJG5-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="wW_zlxKJsFNERpX6SJG5-2" value="SnifferConfigInitializer#initializeCoreConfig" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="270" y="270" width="220" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="wW_zlxKJsFNERpX6SJG5-7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="wW_zlxKJsFNERpX6SJG5-4" target="wW_zlxKJsFNERpX6SJG5-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="wW_zlxKJsFNERpX6SJG5-4" value="1. 从环境变量提取：skywalking_config" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="320" y="380" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="wW_zlxKJsFNERpX6SJG5-9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="wW_zlxKJsFNERpX6SJG5-6" target="wW_zlxKJsFNERpX6SJG5-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="wW_zlxKJsFNERpX6SJG5-10" value="设置了" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="wW_zlxKJsFNERpX6SJG5-9">
+          <mxGeometry x="-0.2756" y="3" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="wW_zlxKJsFNERpX6SJG5-12" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="wW_zlxKJsFNERpX6SJG5-6" target="wW_zlxKJsFNERpX6SJG5-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="wW_zlxKJsFNERpX6SJG5-13" value="没配置" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="wW_zlxKJsFNERpX6SJG5-12">
+          <mxGeometry x="-0.104" y="-3" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="wW_zlxKJsFNERpX6SJG5-6" value="配置环境变量？" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="340" y="510" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="wW_zlxKJsFNERpX6SJG5-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="wW_zlxKJsFNERpX6SJG5-8" target="wW_zlxKJsFNERpX6SJG5-14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="wW_zlxKJsFNERpX6SJG5-8" value="读取环境变量配置的配置文件" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="320" y="680" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="wW_zlxKJsFNERpX6SJG5-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="wW_zlxKJsFNERpX6SJG5-11" target="wW_zlxKJsFNERpX6SJG5-14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="wW_zlxKJsFNERpX6SJG5-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="wW_zlxKJsFNERpX6SJG5-11" target="wW_zlxKJsFNERpX6SJG5-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="wW_zlxKJsFNERpX6SJG5-11" value="读取默认配置文件：/config/agent.config" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="570" y="520" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="wW_zlxKJsFNERpX6SJG5-18" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="wW_zlxKJsFNERpX6SJG5-14" target="wW_zlxKJsFNERpX6SJG5-17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="wW_zlxKJsFNERpX6SJG5-14" value="配置文件不存在" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="820" y="670" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="wW_zlxKJsFNERpX6SJG5-17" value="报错、结束启动" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="950" y="670" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="wW_zlxKJsFNERpX6SJG5-23" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="wW_zlxKJsFNERpX6SJG5-19" target="wW_zlxKJsFNERpX6SJG5-22">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="wW_zlxKJsFNERpX6SJG5-19" value="配置文件读取成功" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="470" y="850" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="wW_zlxKJsFNERpX6SJG5-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="wW_zlxKJsFNERpX6SJG5-8" target="wW_zlxKJsFNERpX6SJG5-19">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="390" y="880" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="wW_zlxKJsFNERpX6SJG5-25" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="wW_zlxKJsFNERpX6SJG5-22" target="wW_zlxKJsFNERpX6SJG5-24">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="wW_zlxKJsFNERpX6SJG5-22" value="将配置文件读取到变量：AGENT_SETTINGS 中、一个properties" style="whiteSpace=wrap;html=1;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="470" y="990" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="wW_zlxKJsFNERpX6SJG5-27" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="wW_zlxKJsFNERpX6SJG5-24" target="wW_zlxKJsFNERpX6SJG5-26">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="wW_zlxKJsFNERpX6SJG5-29" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="wW_zlxKJsFNERpX6SJG5-24" target="wW_zlxKJsFNERpX6SJG5-28">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="wW_zlxKJsFNERpX6SJG5-24" value="将环境变量中的值放入的配置文件中、如果有同名的属性、会被覆盖" style="whiteSpace=wrap;html=1;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="470" y="1130" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="wW_zlxKJsFNERpX6SJG5-26" value="环境变量key: skywalking.&amp;nbsp; 开头" style="whiteSpace=wrap;html=1;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="670" y="1130" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="wW_zlxKJsFNERpX6SJG5-31" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="wW_zlxKJsFNERpX6SJG5-28" target="wW_zlxKJsFNERpX6SJG5-30">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="wW_zlxKJsFNERpX6SJG5-28" value="以启动参数中的 配置添加进去、如果有重复的进行覆盖" style="whiteSpace=wrap;html=1;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="470" y="1270" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="wW_zlxKJsFNERpX6SJG5-33" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="wW_zlxKJsFNERpX6SJG5-30" target="wW_zlxKJsFNERpX6SJG5-32">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="wW_zlxKJsFNERpX6SJG5-30" value="将配置文件读取到的 内容 prop 赋值到配置对象 config 上" style="whiteSpace=wrap;html=1;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="470" y="1410" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="wW_zlxKJsFNERpX6SJG5-32" value="初始化配置 config.class 完成" style="ellipse;whiteSpace=wrap;html=1;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="490" y="1540" width="80" height="80" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
