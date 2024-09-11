@@ -40,7 +40,7 @@ const guideRoute = routeLayout("../guide")
             },
 			{
                 "title": "cpp",
-                "children": routeLayout("../cpp")
+                "children": routeLayout("../CPP")
             }
         ]
     }
