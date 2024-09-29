@@ -1,0 +1,58 @@
+<mxfile host="Electron" modified="2024-09-29T09:20:43.029Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.6.1 Chrome/124.0.6367.207 Electron/30.0.6 Safari/537.36" etag="hS18Sv2NZHDpPfjllM1G" version="24.6.1" type="device">
+  <diagram name="第 1 页" id="NbJ7uVP1SbW0fN08NpJ6">
+    <mxGraphModel dx="1036" dy="614" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="NJu38FcJAUvmYDNz97jk-3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="NJu38FcJAUvmYDNz97jk-1" target="NJu38FcJAUvmYDNz97jk-2" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NJu38FcJAUvmYDNz97jk-1" value="安装插件&lt;div&gt;即增强类&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="250" y="50" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="NJu38FcJAUvmYDNz97jk-2" value="" style="whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="250" y="220" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="_u0lqeuWp6ZSdY1_psYx-3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="_u0lqeuWp6ZSdY1_psYx-1" target="_u0lqeuWp6ZSdY1_psYx-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_u0lqeuWp6ZSdY1_psYx-1" value="对指定类进行增强" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="550" y="60" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="_u0lqeuWp6ZSdY1_psYx-5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="_u0lqeuWp6ZSdY1_psYx-2" target="_u0lqeuWp6ZSdY1_psYx-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_u0lqeuWp6ZSdY1_psYx-2" value="给bytebuddy指定类增强插件：&lt;div&gt;Transformer&lt;br&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="550" y="200" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="_u0lqeuWp6ZSdY1_psYx-7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="_u0lqeuWp6ZSdY1_psYx-4" target="_u0lqeuWp6ZSdY1_psYx-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_u0lqeuWp6ZSdY1_psYx-4" value="每加载到一个类时，会回调Transformer的transform" style="whiteSpace=wrap;html=1;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="550" y="330" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="_u0lqeuWp6ZSdY1_psYx-9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="_u0lqeuWp6ZSdY1_psYx-6" target="_u0lqeuWp6ZSdY1_psYx-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_u0lqeuWp6ZSdY1_psYx-11" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="_u0lqeuWp6ZSdY1_psYx-6" target="_u0lqeuWp6ZSdY1_psYx-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_u0lqeuWp6ZSdY1_psYx-14" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="_u0lqeuWp6ZSdY1_psYx-6" target="_u0lqeuWp6ZSdY1_psYx-13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_u0lqeuWp6ZSdY1_psYx-6" value="判断针对当前读取的类是否有增强的插件？" style="whiteSpace=wrap;html=1;rounded=0;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="550" y="470" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="_u0lqeuWp6ZSdY1_psYx-8" value="pluginFinder.find(typeDescription)" style="whiteSpace=wrap;html=1;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="750" y="470" width="230" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="_u0lqeuWp6ZSdY1_psYx-10" value="有，对类进行增强" style="whiteSpace=wrap;html=1;rounded=0;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="550" y="610" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="_u0lqeuWp6ZSdY1_psYx-13" value="无、直接跳过，不处理当前类" style="whiteSpace=wrap;html=1;rounded=0;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="350" y="470" width="120" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
