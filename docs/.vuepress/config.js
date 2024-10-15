@@ -24,7 +24,8 @@ const guideRoute = routeLayout("../guide")
             },
         ],
         sidebar: [
-            '/', {
+            '/', 
+			{
                 "title": "Guide",
                 "children": guideRoute
             }, {
