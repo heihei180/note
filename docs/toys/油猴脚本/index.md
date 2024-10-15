@@ -1,10 +1,3 @@
----
-title: 油猴脚本=YouTube视频喜欢
-titleTemplate: Vite & Vue powered static site generator
-description: 将我喜欢的视频地址，发送到我自己的后端服务器中.
-outline: true
----
-
 # Youtube 视频喜欢
 
 将一些我自己喜欢的好看的youtube视频地址，发送到我自己的服务器上去，由我自己的视频分类整理。
