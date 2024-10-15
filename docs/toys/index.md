@@ -1,10 +1,3 @@
----
-title: Docs with VitePress
-titleTemplate: Vite & Vue powered static site generator
-description: 描述性文本
-outline: true
----
-
 # 页面说明
 这里存放一些没有啥用的小玩具，可以是一些油猴脚本，学习的临时目录。      
 
