@@ -1,4 +1,4 @@
-const routeLayout = require('./routerLayout-test');
+const routeLayout = require('./routerLayout');
 
 const guideRoute = routeLayout("../guide")
 
@@ -39,12 +39,8 @@ const guideRoute = routeLayout("../guide")
                 "children": routeLayout("../Java")
             },
 			{
-                "title": "CPP",
+                "title": "cpp",
                 "children": routeLayout("../c++")
-            },
-			{
-                "title": "玩具",
-                "children": routeLayout("../toys")
             }
         ]
     }
