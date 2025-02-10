@@ -1,4 +1,3 @@
-## 本资源由 itjc8.com 收集整理
 # channelHandler 的生命周期
 
 > 在前面的小节中，对于 ChannelHandler，我们重点落在了读取数据相关的逻辑，这小节，我们来学习一下 ChannelHandler 的其他回调方法，这些回调方法的执行是有顺序的，而这个执行顺序可以称为 ChannelHandler 的生命周期。

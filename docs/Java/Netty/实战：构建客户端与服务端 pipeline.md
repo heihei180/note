@@ -1,4 +1,3 @@
-## 本资源由 itjc8.com 收集整理
 # 实战：构建客户端与服务端 pipeline
 
 > 通过[上小节](https://juejin.im/book/5b4bc28bf265da0f60130116/section/5b4db06d5188251afc257383)的学习，我们已经了解 pipeline 和 channelHandler 的基本概念。本小节，我们使用上一小节的理论知识来重新构建服务端和客户端的 pipeline，把复杂的逻辑从单独的一个 channelHandler 中抽取出来。

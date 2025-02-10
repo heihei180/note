@@ -1,4 +1,3 @@
-## 本资源由 itjc8.com 收集整理
 # pipeline 与 channelHandler
 
 > 这一小节，我们将会学习 Netty 里面一大核心组件： Pipeline 与 ChannelHandler
