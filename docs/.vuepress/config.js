@@ -40,6 +40,10 @@ const guideRoute = routeLayout("../guide")
                 "children": routeLayout("../Java")
             },
 			{
+				"title":"C#",
+				"children": routeLayout("../c#")
+			},
+			{
                 "title": "CPP",
                 "children": routeLayout("../c++")
             },
