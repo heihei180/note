@@ -1,0 +1,74 @@
+<mxfile host="Electron" modified="2025-03-14T05:54:31.845Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.6.1 Chrome/124.0.6367.207 Electron/30.0.6 Safari/537.36" etag="WlK_s_Ocu0xkKDXvJsRD" version="24.6.1" type="device">
+  <diagram name="第 1 页" id="GqfJgFzbki4jLJJ_5YvJ">
+    <mxGraphModel dx="1036" dy="614" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="wW_zlxKJsFNERpX6SJG5-3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="wW_zlxKJsFNERpX6SJG5-1" target="wW_zlxKJsFNERpX6SJG5-2" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="wW_zlxKJsFNERpX6SJG5-1" value="初始化agent配置" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="320" y="100" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="wW_zlxKJsFNERpX6SJG5-2" value="SnifferConfigInitializer#initializeCoreConfig" style="whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="270" y="270" width="220" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="ST7cU3cc1qaNzW_Cb8vM-3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="ST7cU3cc1qaNzW_Cb8vM-1" target="ST7cU3cc1qaNzW_Cb8vM-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ST7cU3cc1qaNzW_Cb8vM-1" value="agent" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="590" y="100" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="ST7cU3cc1qaNzW_Cb8vM-5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="ST7cU3cc1qaNzW_Cb8vM-2" target="ST7cU3cc1qaNzW_Cb8vM-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ST7cU3cc1qaNzW_Cb8vM-2" value="自定义类加载器去指定位置加载插件的jar包" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="590" y="270" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ST7cU3cc1qaNzW_Cb8vM-7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="ST7cU3cc1qaNzW_Cb8vM-4" target="ST7cU3cc1qaNzW_Cb8vM-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ST7cU3cc1qaNzW_Cb8vM-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="ST7cU3cc1qaNzW_Cb8vM-4" target="ST7cU3cc1qaNzW_Cb8vM-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ST7cU3cc1qaNzW_Cb8vM-11" value="通过match匹配器" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="ST7cU3cc1qaNzW_Cb8vM-10">
+          <mxGeometry x="-0.1456" y="-5" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ST7cU3cc1qaNzW_Cb8vM-4" value="将jar转换成plugin" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="590" y="410" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ST7cU3cc1qaNzW_Cb8vM-9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="ST7cU3cc1qaNzW_Cb8vM-6" target="ST7cU3cc1qaNzW_Cb8vM-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ST7cU3cc1qaNzW_Cb8vM-17" value="监控正常的类" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="ST7cU3cc1qaNzW_Cb8vM-9">
+          <mxGeometry x="-0.22" y="-1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ST7cU3cc1qaNzW_Cb8vM-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="ST7cU3cc1qaNzW_Cb8vM-6" target="ST7cU3cc1qaNzW_Cb8vM-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ST7cU3cc1qaNzW_Cb8vM-6" value="正常启动程序、&lt;div&gt;加载Java类&lt;/div&gt;" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="590" y="550" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ST7cU3cc1qaNzW_Cb8vM-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="ST7cU3cc1qaNzW_Cb8vM-8" target="ST7cU3cc1qaNzW_Cb8vM-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ST7cU3cc1qaNzW_Cb8vM-8" value="匹配器、是否拦截当前类？" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="840" y="550" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ST7cU3cc1qaNzW_Cb8vM-16" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="ST7cU3cc1qaNzW_Cb8vM-12" target="ST7cU3cc1qaNzW_Cb8vM-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ST7cU3cc1qaNzW_Cb8vM-12" value="拦截类" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="707" y="670" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ST7cU3cc1qaNzW_Cb8vM-15" value="进行增强" style="whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="707" y="810" width="120" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
