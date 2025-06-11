@@ -1,3 +1,5 @@
+# mysql 批量执行优化
+
 1. 使用 `mybatis-plus`saveBatch() 函数发现增加34条数据耗时11s....
 
 发现需要添加 mysql 参数：
