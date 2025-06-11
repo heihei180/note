@@ -1,8 +1,9 @@
-**MySQL实战优化**      
 
-<img src="../02_图片/04.jpg" style="width:600px"> 
 
 # MySQL优化实战 
+**MySQL实战优化**      
+
+<img src="./02_图片/04.jpg" style="width:600px"> 
 
 ## 课程介绍
 
@@ -27,7 +28,7 @@
 
 下面是官方的InnoDB引擎架构图，主要分为**内存结构**和**磁盘结构**两大部分。
 
-<img src="../02_图片/01.jpg" style="width:600px">    
+<img src="./02_图片/01.jpg" style="width:600px">    
 
 ### InnoDB 内存结构 
 
@@ -41,7 +42,7 @@
 
 ​	Buffer Pool默认大小是128M, 以Page页为单位，Page页默认大小16K，而控制块的大小约为数据页的5%，大	概是800字节。
 
-<img src="../02_图片/03.jpg" style="width:600px"> 
+<img src="./02_图片/03.jpg" style="width:600px"> 
 
 > 注:Buffer Pool大小为128M指的就是缓存页的大小，控制块则一般占5%，所以每次会多申请6M的内存空间用于存放控制块
 
@@ -51,7 +52,7 @@
 
 MySQl中有一个哈希表数据结构，它使用表空间号+数据页号，作为一个key，然后缓冲页对应的控制块作为value。
 
-<img src="../02_图片/10.jpg" style="width:400px"> 
+<img src="./02_图片/10.jpg" style="width:400px"> 
 
 - **当需要访问某个页的数据时，先从哈希表中根据表空间号+页号看看是否存在对应的缓冲页。**
 
@@ -67,7 +68,7 @@ BP的底层采用链表数据结构管理Page。在InnoDB访问表记录和索�
 
 - Page根据状态可以分为三种类型：
   
-  <img src="../02_图片/05.jpg" style="width:600px">   
+  <img src="./02_图片/05.jpg" style="width:600px">   
   
   - free page ： 空闲page，未被使用
   
@@ -87,7 +88,7 @@ BP的底层采用链表数据结构管理Page。在InnoDB访问表记录和索�
 - free链表是把所有空闲的缓冲页对应的控制块作为一个个的节点放到一个链表中，这个链表便称之为free链表
 - 基节点:  free链表中只有一个基节点是不记录缓存页信息(单独申请空间)，它里面就存放了free链表的头节点的地址，尾节点的地址，还有free链表里当前有多少个节点。
 
-<img src="../02_图片/07.jpg" style="width:650px">   
+<img src="./02_图片/07.jpg" style="width:650px">   
 
 磁盘加载页的流程: 
 
@@ -102,7 +103,7 @@ BP的底层采用链表数据结构管理Page。在InnoDB访问表记录和索�
 - InnoDB引擎为了提高处理效率，在每次修改缓冲页后，并不是立刻把修改刷新到磁盘上，而是在未来的某个时间点进行刷新操作. 所以需要使用到flush链表存储脏页，凡是被修改过的缓冲页对应的控制块都会作为节点加入到flush链表.
 - flush链表的结构与free链表的结构相似
 
-<img src="../02_图片/08.jpg" style="width:750px"> 
+<img src="./02_图片/08.jpg" style="width:750px"> 
 
 > 注: 脏页即存在于flush链表，也在LRU链表中，但是两种互不影响，LRU链表负责管理page的可用性和释放，而flush链表负责管理脏页的刷盘操作。
 >
@@ -115,7 +116,7 @@ BP的底层采用链表数据结构管理Page。在InnoDB访问表记录和索�
 
 LRU = Least Recently Used（最近最少使用）: 就是末尾淘汰法，新数据从链表头部加入，释放空间时从末尾淘汰.
 
-<img src="../02_图片/06.jpg" style="width:650px; height:320px">     
+<img src="./02_图片/06.jpg" style="width:650px; height:320px">     
 
 1. 当要访问某个页时，如果不在Buffer Pool，需要把该页加载到缓冲池,并且把该缓冲页对应的控制块作为节点添加到LRU链表的头部。
 
@@ -137,13 +138,13 @@ LRU = Least Recently Used（最近最少使用）: 就是末尾淘汰法，新�
 
   - 由于MySQL中存在预读机制，很多预读的页都会被放到LRU链表的表头。如果这些预读的页都没有用到的话，这样，会导致很多尾部的缓冲页很快就会被淘汰。
 
-    <img src="../02_图片/02.jpg" style="width:550px"> 
+    <img src="./02_图片/02.jpg" style="width:550px"> 
 
 **改进型LRU算法**
 
 改性LRU：链表分为new和old两个部分，加入元素时并不是从表头插入，而是从中间midpoint位置插入(就是说从磁盘中新读出的数据会放在冷数据区的头部)，如果数据很快被访问，那么page就会向new列表头部移动，如果数据没有被访问，会逐步向old尾部移动，等待淘汰。
 
-  <img src="../02_图片/11.jpg" style="width:650px;  height:200px"> 
+  <img src="./02_图片/11.jpg" style="width:650px;  height:200px"> 
 
   冷数据区的数据页什么时候会被转到到热数据区呢 ?
 
@@ -163,7 +164,7 @@ LRU = Least Recently Used（最近最少使用）: 就是末尾淘汰法，新�
 
 ​	ChangeBuffer占用BufferPool空间，默认占25%，最大允许占50%，可以根据读写	业务量来进行调整。参数`innodb_change_buffer_max_size`; 
 
- <img src="../02_图片/43.jpg" style="width:550px;  height:400px"> 
+ <img src="./02_图片/43.jpg" style="width:550px;  height:400px"> 
 
 1. ChangeBuffer用于存储SQL变更操作，比如Insert/Update/Delete等SQL语句
 2. ChangeBuffer中的每个变更操作都有其对应的数据页，并且该数据页未加载到缓存中；
@@ -183,7 +184,7 @@ LRU = Least Recently Used（最近最少使用）: 就是末尾淘汰法，新�
  	2. 如果该记录在BufferPool不存在（没有命中），在不影响数据一致性的前提下，InnoDB 会将这些更新操作缓存在 change buffer 中不用再去磁盘查询数据，避免一次磁盘IO。
  	3. 当下次查询记录时，会将数据页读入内存，然后执行change buffer中与这个页有关的操作.通过这种方式就能保证这个数据逻辑的正确性。
 
-<img src="../02_图片/12.jpg" style="width:650px;  height:300px">
+<img src="./02_图片/12.jpg" style="width:650px;  height:300px">
 
 
 
@@ -217,7 +218,7 @@ Log Buffer：日志缓冲区，用来保存要写入磁盘上log文件（Redo/Un
 
 LogBuffer主要作用是: 用来优化每次更新操作之后都要写入redo log 而产生的磁盘IO问题.
 
-<img src="../02_图片/14.jpg" style="width:550px;  height:400px"> 
+<img src="./02_图片/14.jpg" style="width:550px;  height:400px"> 
 
 LogBuffer空间满了，会自动写入磁盘。可以通过将innodb_log_buffer_size参数调大，减少磁盘IO频率
 
@@ -232,7 +233,7 @@ InnoDB磁盘主要包含Tablespaces，InnoDB Data Dictionary、Doublewrite Buffe
 - Redo log：存储的是log buffer刷到磁盘的数据
 - Undo log：存在于global临时表空间中，用于事务的回滚
 
-<img src="../02_图片/16.jpg" style="width:650px;  height:700px">   
+<img src="./02_图片/16.jpg" style="width:650px;  height:700px">   
 
 #### 1. 表空间 ( Tablespaces )
 
@@ -533,7 +534,7 @@ InnoDB磁盘主要包含Tablespaces，InnoDB Data Dictionary、Doublewrite Buffe
 
   InnoDB数据字典由内部系统表组成，这些表包含用于查找表、索引和表字段等对象的元数据。元数据物理上位于InnoDB系统表空间中。在MySQL8.0之前 由于历史原因，数据字典元数据在一定程度上与InnoDB表元数据文件（.frm文件）中存储的信息重叠。
   
-  <img src="../02_图片/18.jpg" style="width:550px;  ">  
+  <img src="./02_图片/18.jpg" style="width:550px;  ">  
   
   
 
@@ -549,7 +550,7 @@ InnoDB磁盘主要包含Tablespaces，InnoDB Data Dictionary、Doublewrite Buffe
 
   如果存储引擎正在写入页的数据到磁盘时发生了宕机，可能出现页只写了一部分的情况，比如只写了4K，就宕机了，这种情况叫做部分写失效（partial page write），可能会导致数据丢失。
 
-  <img src="../02_图片/19.jpg" style="width:650px;  "> 
+  <img src="./02_图片/19.jpg" style="width:650px;  "> 
   
   
 
@@ -577,7 +578,7 @@ InnoDB磁盘主要包含Tablespaces，InnoDB Data Dictionary、Doublewrite Buffe
 
 - 数据双写流程
 
-  <img src="../02_图片/21.jpg" style="width:650px;  "> 
+  <img src="./02_图片/21.jpg" style="width:650px;  "> 
 
   - **step1**：当进行缓冲池中的脏页刷新到磁盘的操作时,并不会直接写磁盘,每次脏页刷新必须要先写double write .
 
@@ -629,7 +630,7 @@ InnoDB磁盘主要包含Tablespaces，InnoDB Data Dictionary、Doublewrite Buffe
 
 1. **脏页落盘机制**     
 
-<img src="../02_图片/22.jpg" style="width:550px; "> 
+<img src="./02_图片/22.jpg" style="width:550px; "> 
 
 脏页是指修改了Buffer Pool中的数据页后,导致了内存中的数据页和磁盘中的数据页不一致,这时就出现了脏页.
 
@@ -680,7 +681,7 @@ Redo Buffer 持久化到 redo log 的策略，可通过`Innodb_flush_log_at_trx_
 
 一般建议选择取值2，因为 MySQL 挂了数据没有损失，整个服务器挂了才会损失1秒的事务提交数据
 
-<img src="../02_图片/23.jpg" style="width:650px;  "> 
+<img src="./02_图片/23.jpg" style="width:650px;  "> 
 
 
 
@@ -696,7 +697,7 @@ Redo Buffer 持久化到 redo log 的策略，可通过`Innodb_flush_log_at_trx_
 
   redo日志属于物理日志, 只是记录一下事务对数据库做了哪些修改。
 
-  <img src="../02_图片/24.jpg" style="width:650px;  "> 
+  <img src="./02_图片/24.jpg" style="width:650px;  "> 
 
   1. **type**: 该条日志的类型
   2. **space ID** : 表空间ID
@@ -717,11 +718,11 @@ Redo Buffer 持久化到 redo log 的策略，可通过`Innodb_flush_log_at_trx_
 
   - **MLOG_8BYTE (type=8)** : 表示在页面的某个偏移量处写入**8字节**的redo日志类型。
 
-    <img src="../02_图片/25.jpg" style="width:650px;  "> 
+    <img src="./02_图片/25.jpg" style="width:650px;  "> 
 
   - **MLOG_WRITE_STRING（type=30）**: 表示在页面的某个偏移量处写入一串数据，但是因为不能确定写入的具体数据占用多少字节，所以需要在日志结构中添加一个len字段。。
 
-    <img src="../02_图片/26.jpg" style="width:650px;  "> 
+    <img src="./02_图片/26.jpg" style="width:650px;  "> 
 
 
 
@@ -733,7 +734,7 @@ Redo Buffer 持久化到 redo log 的策略，可通过`Innodb_flush_log_at_trx_
 
   **redo log 三种状态** 
 
-  <img src="../02_图片/44.jpg" style="width:650px;  "> 
+  <img src="./02_图片/44.jpg" style="width:650px;  "> 
 
   1. 存在于redo log buffer 内存区域中
 
@@ -807,7 +808,7 @@ Redo Buffer 持久化到 redo log 的策略，可通过`Innodb_flush_log_at_trx_
   
   InnoDB 以环型方式(circular fashion)写入数据到重做日志文件，当文件满了的时候，会自动切换到日志文件2，当重做日志文件2也写满时，会再切换到重做日志文件1；
   
-  <img src="../02_图片/27.jpg" style="width:650px;  "> 
+  <img src="./02_图片/27.jpg" style="width:650px;  "> 
   
   **write pos**: 表示日志当前记录的位置，当ib_logfile_4写满后，会从ib_logfile_1从头开始记录；
   
@@ -860,7 +861,7 @@ Redo Buffer 持久化到 redo log 的策略，可通过`Innodb_flush_log_at_trx_
 
   undo log日志的删除是通过通过后台purge线程进行回收处理的。
 
-  <img src="../02_图片/29.jpg" style="width:750px;  "> 
+  <img src="./02_图片/29.jpg" style="width:750px;  "> 
   
   1. 事务A执行update更新操作，在事务没有提交之前，会将旧版本数据备份到对应的undo buffer中，然后再由undo buffer持久化到磁盘中的undo log文件中, 之后才会对user进行更新操作,然后持久化到磁盘.
   2. 在事务A执行的过程中,事务B对User进行了查询
@@ -900,7 +901,7 @@ Redo Buffer 持久化到 redo log 的策略，可通过`Innodb_flush_log_at_trx_
 
   InnoDB引擎管理的数据表中每行行记录,都存在着三个隐藏列:
 
-  <img src="../02_图片/45.jpg" style="width:550px;  ">  
+  <img src="./02_图片/45.jpg" style="width:550px;  ">  
 
   - `DB_ROW_ID` : 如果没有为表显式的定义主键，并且表中也没有定义唯一索引，那么InnoDB会自动为表添加一个row_id的隐藏列作为主键。
   - `DB_TRX_ID` : 事务中对某条记录做增删改时,就会将这个事务的事务ID写入到trx_id中.
@@ -912,7 +913,7 @@ Redo Buffer 持久化到 redo log 的策略，可通过`Innodb_flush_log_at_trx_
 
   插入一条数据对应的undo操作其实就是根据主键删除这条数据就行了。所以 insert 对应的 undo log 主要是把这条记录的主键记录上
 
-  <img src="../02_图片/46.jpg" style="width:550px; height:100px; "> 
+  <img src="./02_图片/46.jpg" style="width:550px; height:100px; "> 
 
   - start、end：指向记录开始和结束的位置。
   - 主键列信息：记录INSERT这行数据的主键ID信息，或者唯一列信息。
@@ -925,7 +926,7 @@ Redo Buffer 持久化到 redo log 的策略，可通过`Innodb_flush_log_at_trx_
 
   通过一个事物操作,我们一起来看一下回滚链的形成.
 
-  <img src="../02_图片/47.jpg" style="width:750px;  ">    
+  <img src="./02_图片/47.jpg" style="width:750px;  ">    
 
    
 
@@ -1021,7 +1022,7 @@ Redo Buffer 持久化到 redo log 的策略，可通过`Innodb_flush_log_at_trx_
 
     缺点：在某些情况下会导致主从数据不一致，比如last_insert_id()、now()等函数。
 
-    <img src="../02_图片/30.jpg" style="width:550px;  "> 
+    <img src="./02_图片/30.jpg" style="width:550px;  "> 
 
   - MIXED（mixed-based replication, MBR）：以上两种模式的混合使用，一般会使用STATEMENT模式保存binlog，对于STATEMENT模式无法复制的操作使用ROW模式保存binlog，MySQL会根据执行的SQL语句选择写入模式。
 
@@ -1045,7 +1046,7 @@ Redo Buffer 持久化到 redo log 的策略，可通过`Innodb_flush_log_at_trx_
 
   比较常用的log event有：`Query event`、`Row event`、`Xid event`等。binlog文件的内容就是各种Log event的集合。
 
-  <img src="../02_图片/31.jpg" style="width:550px;  "> 
+  <img src="./02_图片/31.jpg" style="width:550px;  "> 
 
   
 
@@ -1077,7 +1078,7 @@ Redo Buffer 持久化到 redo log 的策略，可通过`Innodb_flush_log_at_trx_
 
   **3) binlog 写入流程** 
 
-  <img src="../02_图片/48.jpg" style="width:650px;  "> 
+  <img src="./02_图片/48.jpg" style="width:650px;  "> 
 
   1. 根据记录模式和操作触发event事件生成log event.
   2. 事务执行过程中，先把日志(log event) 写到binlog cache，事务提交的时候，再把binlog cache写到binlog文件中。
@@ -1292,7 +1293,7 @@ Redo Buffer 持久化到 redo log 的策略，可通过`Innodb_flush_log_at_trx_
 
 #### 7. 新版本结构演变
 
-<img src="../02_图片/33.jpg" style="width:650px;  "> 
+<img src="./02_图片/33.jpg" style="width:650px;  "> 
 
 - MySQL 5.7 版本
 
@@ -1311,7 +1312,7 @@ Redo Buffer 持久化到 redo log 的策略，可通过`Innodb_flush_log_at_trx_
 
 ### InnoDB 线程模型
 
-<img src="../02_图片/42.jpg" style="width:550px;  ">  
+<img src="./02_图片/42.jpg" style="width:550px;  ">  
 
 InnoDB存储引擎是多线程的模型，因此其后台有多个不同的后台线程，负责处理不同的任务.
 
@@ -1325,7 +1326,7 @@ InnoDB存储引擎是多线程的模型，因此其后台有多个不同的后�
 show engine innodb status; 
 ```
 
-<img src="../02_图片/49.jpg" style="width:550px;  "> 
+<img src="./02_图片/49.jpg" style="width:550px;  "> 
 
 - read thread ： 负责读取操作，将数据从磁盘加载到缓存page页。4个
 - write thread：负责写操作，将缓存脏页刷新到磁盘。4个
@@ -1416,7 +1417,7 @@ Master thread是InnoDB的主线程，负责调度其他各线程，优先级最�
 
 InnoDB表空间文件结构分为: Tablespace(表空间) -->  Segment（段）-->Extent（区）-->Page（页）--> Row（行）
 
-<img src="../02_图片/34.jpg" style="width:650px;  "> 
+<img src="./02_图片/34.jpg" style="width:650px;  "> 
 
 **1) Tablesapce**
 
@@ -1451,7 +1452,7 @@ Page是整个InnoDB存储的最基本构件，也是InnoDB磁盘管理的最小�
 
 Page分为几种类型，常见的页类型有数据页（B+tree Node）Undo页（Undo Log Page）系统页（System Page） 事务数据页（Transaction System Page）等
 
-<img src="../02_图片/36.jpg" style="width:450px;  "> 
+<img src="./02_图片/36.jpg" style="width:450px;  "> 
 
 **Page 各部分说明**   
 
@@ -1489,7 +1490,7 @@ Page分为几种类型，常见的页类型有数据页（B+tree Node）Undo页�
 
 其中比较重要的是在文件头中的 `FIL_PAGE_PREV` 和 `FIL_PAGE_NEXT` 字段，通过这两个字段，我们可以找到该页的上一页和下一页，实际上所有页通过两个字段可以形成一条双向链表
 
-<img src="../02_图片/37.jpg" style="width:550px;  ">  
+<img src="./02_图片/37.jpg" style="width:550px;  ">  
 
 
 
@@ -1497,13 +1498,13 @@ Page分为几种类型，常见的页类型有数据页（B+tree Node）Undo页�
 
 页的主要作用是存储记录，所以“最小和最大记录”和“用户记录”部分占了页结构的主要空间。另外空闲空间是个灵活的部分，当有新的记录插入时，会从空闲空间中进行分配用于存储新记录
 
-<img src="../02_图片/38.jpg" style="width:450px;  "> 
+<img src="./02_图片/38.jpg" style="width:450px;  "> 
 
 **3)数据目录部分 (Page Directory)**  
 
 数据页中行记录按照主键值由小到大顺序串联成一个单链表(**页中记录是以单向链表的形式进行存储的**)，且单链表的链表头为最小记录，链表尾为最大记录。并且为了更快速地定位到指定的行记录，通过`Page Directory`实现目录的功能，借助`Page Directory`使用二分法快速找到需要查找的行记录。
 
-<img src="../02_图片/39.jpg" style="width:650px;  "> 
+<img src="./02_图片/39.jpg" style="width:650px;  "> 
 
 #### 3.行记录格式
 
@@ -1538,7 +1539,7 @@ ALTER TABLE <table_name> ROW_FORMAT=行格式名称
 Compact 设计目标是高效地存储数据，一个页中存放的行数据越多，其性能就越高。
 
 compact行记录由两部分组成: 记录放入额外信息 和  记录的真实数据.
-<img src="../02_图片/50.jpg" style="width:650px; height:120px "> 
+<img src="./02_图片/50.jpg" style="width:650px; height:120px "> 
 
 - **记录额外信息部分** 
 
@@ -1604,7 +1605,7 @@ compact行记录由两部分组成: 记录放入额外信息 和  记录的真�
 
   记录的真实数据除了插入的那些列的数据，MySQL会为每个记录默认的添加一些列（也称为隐藏列），具体的列如下： 
 
-  <img src="../02_图片/51.jpg" style="width:450px; height:130px">  
+  <img src="./02_图片/51.jpg" style="width:450px; height:130px">  
 
   | 列名           | 是否必须 | 占用空间 | 描述                  |
   | -------------- | -------- | -------- | --------------------- |
@@ -1634,7 +1635,7 @@ compact行记录由两部分组成: 记录放入额外信息 和  记录的真�
   InnoDB 规定一页至少存储两条记录(B+树特点)，如果页中只能存放下一条记录，InnoDB存储引擎会自动将行数据存放到溢出页中.
   当发生行溢出时，数据页只保存了前768字节的前缀数据，接着是20个字节的偏移量，指向行溢出页.
 
-  <img src="../02_图片/53.jpg" style="width:550px; height:230px"> 
+  <img src="./02_图片/53.jpg" style="width:550px; height:230px"> 
 
   
 
@@ -1646,7 +1647,7 @@ compact行记录由两部分组成: 记录放入额外信息 和  记录的真�
 
      Compressed 和 Dynamic 行记录格式与 Compact 行记录格式是类似的，区别是在处理行溢出时,数据页不会存储真实数据的前768字节(完全溢出)，只存储20个字节的指针来指向溢出页。
 
-     <img src="../02_图片/53.jpg" style="width:650px; height:220px "> 
+     <img src="./02_图片/53.jpg" style="width:650px; height:220px "> 
 
      > Compressed 与 Dynamic 相比，Compressed 存储的行数据会以zlib的算法进行压缩以节省空间，因此对于 BLOB、TEXT、VARCHAR 这类大长度类型的数据能够进行非常有效的存储。
      >
@@ -1656,7 +1657,7 @@ compact行记录由两部分组成: 记录放入额外信息 和  记录的真�
 
        Redundant是 MySQL5.0 版本之前 InnoDB 的行记录存储方式。
 
-     <img src="../02_图片/52.jpg" style="width:650px; height:120px "> 
+     <img src="./02_图片/52.jpg" style="width:650px; height:120px "> 
 
      Redundant 行记录格式的首部是一个字段长度偏移列表，同样是按照列的顺序逆序放置的。该条记录中所有列（包括隐藏列、NULL值列）的长度信息都按照逆序存储到字段长度偏移列表。
 
@@ -1729,7 +1730,7 @@ compact行记录由两部分组成: 记录放入额外信息 和  记录的真�
 
 buffer pool 可以存放多个 instance，每个instance由多个chunk组成。instance的数量范围和chunk的总数量范围分别为1-64，1-1000。
 
-<img src="../02_图片/55.jpg" style="width:450px; height:250px ">  
+<img src="./02_图片/55.jpg" style="width:450px; height:250px ">  
 
 - `Innodb_buffer_pool_instances` 的默认值是1，最大可以调整成64
 
@@ -1854,7 +1855,7 @@ mysql> show variables like '%innodb_page_size%';
 
   innodb_page_size的官方描述:
 
-  <img src="../02_图片/56.jpg" style="width:550px; height:350px ">   
+  <img src="./02_图片/56.jpg" style="width:550px; height:350px ">   
 
   MySQL 5.7增加了对32KB和64KB页面大小的支持。默认的16KB或更大的页面大小适用于各种工作负载，特别是涉及表扫描的查询和涉及批量更新的DML操作。对于涉及许多小写操作的OLTP工作负载，较小的页面大小可能更有效.
 
@@ -2241,7 +2242,7 @@ MySQL默认使用B+树结构管理索引,B+树中的B代表平衡（balance ),�
 
 下面是一张数据库的表,有两列,分别是 Col1 和 Col2
 
-<img src="../02_图片/57.jpg" style="width:400px"> 
+<img src="./02_图片/57.jpg" style="width:400px"> 
 
 我们来查找一下col2=89的这行数据,SQL语句如下:
 
@@ -2251,7 +2252,7 @@ select * from a where col2 = 87
 
 没有用索引时执行上面的查询 , 数据从磁盘一条一条拿来对比最终找到结果，如果数据表很大,数据又在表尾的话,需要花费非常多的时间检索,效率低下。
 
-<img src="../02_图片/59.jpg" style="width:180px">   
+<img src="./02_图片/59.jpg" style="width:180px">   
 
 
 
@@ -2261,7 +2262,7 @@ select * from a where col2 = 87
 
 这样查找时 就可以使用二叉树查找获取相应的数据,从而快速检索出符合条件的记录
 
-<img src="../02_图片/60.jpg" style="width:680px"> 
+<img src="./02_图片/60.jpg" style="width:680px"> 
 
 对该二叉树的节点进行查找发现深度为1的节点的查找次数为1,深度为2的查找次数为2,深度为n的节点的查找次数为n,因此其平均查找次数为 (1+2+2+3+3+3+3) / 6 = 2.8次.
 
@@ -2273,7 +2274,7 @@ MySQL 索引底层使用的并不是二叉树,因为二叉树存在一个很大�
 
 测试链接: https://www.cs.usfca.edu/~galles/visualization/BST.html
 
-<img src="../02_图片/61.jpg" style="width:380px"> 
+<img src="./02_图片/61.jpg" style="width:380px"> 
 
 #### 2.平衡二叉树 (AVL Tree)
 
@@ -2287,7 +2288,7 @@ MySQL 索引底层使用的并不是二叉树,因为二叉树存在一个很大�
 
 ​	右边的不是AVL树，其根节点的左子树高度为3，而右子树高度为1； 
 
-<img src="../02_图片/62.jpg" style="width:680px">  
+<img src="./02_图片/62.jpg" style="width:680px">  
 
 
 
@@ -2301,7 +2302,7 @@ AVL树失去平衡之后，可以通过旋转使其恢复平衡. 接下来我们
   2. 将新根节点的右孩子作为原来根节点的左孩子
   3. 将原根节点的作为新根节点的右孩子
 
-  <img src="../02_图片/63.jpg" style="width:680px"> 
+  <img src="./02_图片/63.jpg" style="width:680px"> 
 
 - RR旋转(右右旋转) ,根节点的右子树高度比左子树高度高2,旋转方法与LL旋转对称
 
@@ -2309,7 +2310,7 @@ AVL树失去平衡之后，可以通过旋转使其恢复平衡. 接下来我们
   2. 将新根节点的左孩子作为原来根节点的右孩子
   3. 将原根节点的作为新根节点的左孩子
 
-  <img src="../02_图片/64.jpg" style="width:680px"> 
+  <img src="./02_图片/64.jpg" style="width:680px"> 
 
 
 
@@ -2342,7 +2343,7 @@ B-Tree中所有节点的子树个数的最大值称为B-Tree的阶,用m表示.�
   3. 分支节点至少有(m/2)颗子树 (除去根节点和叶子节点其他都是分支节点)
   4. 所有叶子节点都在同一层,并且以升序排序
 
-<img src="../02_图片/66.jpg" style="width:700px; height:250px"> 
+<img src="./02_图片/66.jpg" style="width:700px; height:250px"> 
 
 - 什么是B-Tree的阶 ?
 
@@ -2359,7 +2360,7 @@ B-Tree中所有节点的子树个数的最大值称为B-Tree的阶,用m表示.�
 - 每个节点可以存放多个索引值及对应的data数据
 - 树节点中的多个索引值从左到右升序排列
 
-<img src="../02_图片/65.jpg" style="width:680px"> 
+<img src="./02_图片/65.jpg" style="width:680px"> 
 
 
 
@@ -2386,7 +2387,7 @@ B-Tree的查找可以分为3步:
 插入顺序: 32 3 12 54 1 9 14 21 54 65 66
 ```
 
-<img src="../02_图片/67.jpg" style="width:680px; height:250px"> 
+<img src="./02_图片/67.jpg" style="width:680px; height:250px"> 
 
 
 
@@ -2410,7 +2411,7 @@ B+Tree是在B-Tree基础上的一种优化，使其更适合实现存储索引�
 - 所有叶子节点之间都有一个链指针.
 - 数据记录都存放在叶子节点中.
 
-<img src="../02_图片/98.jpg" style="width:680px; height:250px">  
+<img src="./02_图片/98.jpg" style="width:680px; height:250px">  
 
 
 
@@ -2432,7 +2433,7 @@ B+Tree是在B-Tree基础上的一种优化，使其更适合实现存储索引�
 
 MySQL设计者将一个B+Tree的节点的大小设置为等于一个页. (这样做的目的是每个节点只需要一次I/O就可以完全载入), InnoDB的一个页的大小是16KB,所以每个节点的大小也是16KB, 并且B+Tree的根节点是保存在内存中的,子节点才是存储在磁盘上.
 
-<img src="../02_图片/69.jpg" style="width:680px; height:250px"> 
+<img src="./02_图片/69.jpg" style="width:680px; height:250px"> 
 
 
 
@@ -2450,7 +2451,7 @@ MySQL中索引的常用数据结构有两种: 一种是BTree,另一种则是Hash
 
 Hash底层实现是由Hash表来实现的，是根据键值 <key,value> 存储数据的结构。非常适合根据key查找value值，也就是单个key查询，或者说等值查询。
 
-<img src="../02_图片/70.jpg" style="width:680px; height:250px"> 
+<img src="./02_图片/70.jpg" style="width:680px; height:250px"> 
 
 对于每一行数据，存储引擎都会对所有的索引列计算一个哈希码，哈希码是一个较小的值,如果出现哈希码值相同的情况会拉出一条链表.
 
@@ -2500,13 +2501,13 @@ Hash底层实现是由Hash表来实现的，是根据键值 <key,value> 存储�
   - 如果表没有定义主键，则第一个非空unique列作为聚簇索引
   - 否则InnoDB会从建一个隐藏的row-id作为聚簇索引
 
-  <img src="../02_图片/001.jpg" style="width:380px; height:350px"> 
+  <img src="./02_图片/001.jpg" style="width:380px; height:350px"> 
 
 - **非聚簇索引(二级索引)**  
 
   InnoDB的二级索引，是根据索引列构建 B+Tree结构。但在 B+Tree 的叶子节点中只存了索引列和主键的信息。二级索引占用的空间会比聚簇索引小很多， 通常创建辅助索引就是为了提升查询效率。一个表InnoDB只能创建一个聚簇索引，但可以创建多个辅助索引。
 
-  <img src="../02_图片/002.jpg" style="width:330px; height:350px"> 
+  <img src="./02_图片/002.jpg" style="width:330px; height:350px"> 
 
   
 
@@ -2530,7 +2531,7 @@ Hash底层实现是由Hash表来实现的，是根据键值 <key,value> 存储�
 
     第二遍: 根据主键值在聚集索引中定位到具体的记录
 
-  <img src="../02_图片/004.jpg" style="width:530px; height:350px"> 
+  <img src="./02_图片/004.jpg" style="width:530px; height:350px"> 
 
   **回表:  先根据普通索引查询到主键值，再根据主键值在聚集索引中获取行记录,这就是回表. 回表查询,相对于只扫描一遍聚集索引树的性能 要低一些** 
 
@@ -2557,7 +2558,7 @@ Hash底层实现是由Hash表来实现的，是根据键值 <key,value> 存储�
     WHERE user_name = 'tom' AND user_age = 17;
     ```
 
-    <img src="../02_图片/003.jpg" style="width:530px; height:270px">  
+    <img src="./02_图片/003.jpg" style="width:530px; height:270px">  
 
 ### Explain性能分析
 
@@ -2567,7 +2568,7 @@ Hash底层实现是由Hash表来实现的，是根据键值 <key,value> 存储�
 
 - **MySQL查询过程**
 
-<img src="../02_图片/005.jpg" style="width:630px; height:370px"> 
+<img src="./02_图片/005.jpg" style="width:630px; height:370px"> 
 
 通过explain我们可以获得以下信息：
 
@@ -2584,7 +2585,7 @@ Explain使用方式: **explain+sql语句**, 通过执行explain可以获得sql�
 explain select * from L1;
 ```
 
-<img src="../02_图片/71.jpg" style="width:830px; height:70px">  
+<img src="./02_图片/71.jpg" style="width:830px; height:70px">  
 
 #### 2.Explain 详解
 
@@ -2619,7 +2620,7 @@ INSERT INTO L4(title) VALUES('ruyuan010'),('ruyuan011'),('ruyuan012');
   EXPLAIN SELECT * FROM  L1,L2,L3 WHERE L1.id=L2.id AND L2.id = L3.id;
   ```
 
-  <img src="../02_图片/72.jpg" style="width:830px; height:70px"> 
+  <img src="./02_图片/72.jpg" style="width:830px; height:70px"> 
 
   
 
@@ -2630,7 +2631,7 @@ INSERT INTO L4(title) VALUES('ruyuan010'),('ruyuan011'),('ruyuan012');
   	SELECT id FROM L1 WHERE id = (SELECT L3.id FROM L3 WHERE L3.title = 'ruyuan007'));
   ```
 
-  <img src="../02_图片/73.jpg" style="width:830px; height:70px"> 
+  <img src="./02_图片/73.jpg" style="width:830px; height:70px"> 
 
 
 
@@ -2644,7 +2645,7 @@ INSERT INTO L4(title) VALUES('ruyuan010'),('ruyuan011'),('ruyuan012');
   EXPLAIN SELECT * FROM L1 where id = 1;
   ```
 
-  <img src="../02_图片/74.jpg" style="width:830px; height:70px"> 
+  <img src="./02_图片/74.jpg" style="width:830px; height:70px"> 
 
   
 
@@ -2657,7 +2658,7 @@ INSERT INTO L4(title) VALUES('ruyuan010'),('ruyuan011'),('ruyuan012');
   	SELECT id FROM L1 WHERE id = (SELECT L3.id FROM L3 WHERE L3.title = 'ruyuan08'));
   ```
 
-  <img src="../02_图片/73.jpg" style="width:830px; height:70px">
+  <img src="./02_图片/73.jpg" style="width:830px; height:70px">
 
   
 
@@ -2671,7 +2672,7 @@ INSERT INTO L4(title) VALUES('ruyuan010'),('ruyuan011'),('ruyuan012');
   EXPLAIN SELECT * FROM (select * from L3 union select * from L4)a;
   ```
 
-  <img src="../02_图片/75.jpg" style="width:830px; height:80px"> 
+  <img src="./02_图片/75.jpg" style="width:830px; height:80px"> 
 
 
 
@@ -2715,7 +2716,7 @@ system > const > eq_ref > ref > range > index > ALL
   explain select * from L1 where title = 'ruyuan001'; 
   ```
 
-  <img src="../02_图片/76.jpg" style="width:830px; height:80px"> 
+  <img src="./02_图片/76.jpg" style="width:830px; height:80px"> 
 
   
 
@@ -2727,7 +2728,7 @@ system > const > eq_ref > ref > range > index > ALL
   EXPLAIN SELECT L1.id,L1.title FROM L1 left join L2 on L1.id = L2.id;
   ```
 
-  <img src="../02_图片/77.jpg" style="width:830px; height:80px"> 
+  <img src="./02_图片/77.jpg" style="width:830px; height:80px"> 
 
   
 
@@ -2741,7 +2742,7 @@ system > const > eq_ref > ref > range > index > ALL
   EXPLAIN SELECT * FROM L1 inner join L2 on L1.title = L2.title;
   ```
 
-  <img src="../02_图片/78.jpg" style="width:830px; height:80px"> 
+  <img src="./02_图片/78.jpg" style="width:830px; height:80px"> 
 
   
 
@@ -2751,7 +2752,7 @@ system > const > eq_ref > ref > range > index > ALL
   EXPLAIN SELECT * FROM L1 WHERE L1.id between 1 and  10;
   ```
 
-  <img src="../02_图片/79.jpg" style="width:830px; height:80px"> 
+  <img src="./02_图片/79.jpg" style="width:830px; height:80px"> 
 
   > 注: 当in函数中的数据很大时,可能会导致效率下降,最终不走索引
 
@@ -2766,7 +2767,7 @@ system > const > eq_ref > ref > range > index > ALL
   EXPLAIN SELECT count(*) FROM L2;
   ```
 
-  <img src="../02_图片/80.jpg" style="width:830px; height:80px"> 
+  <img src="./02_图片/80.jpg" style="width:830px; height:80px"> 
 
 
 
@@ -2776,7 +2777,7 @@ system > const > eq_ref > ref > range > index > ALL
   EXPLAIN SELECT * FROM L3 inner join L4 on L3.title = L4.title ;
   ```
 
-  <img src="../02_图片/81.jpg" style="width:830px; height:80px"> 
+  <img src="./02_图片/81.jpg" style="width:830px; height:80px"> 
 
 
 
@@ -2812,7 +2813,7 @@ system > const > eq_ref > ref > range > index > ALL
 EXPLAIN SELECT L3.id FROM L3;
 ```
 
-<img src="../02_图片/82.jpg" style="width:830px; height:80px"> 
+<img src="./02_图片/82.jpg" style="width:830px; height:80px"> 
 
 2. 理论和实际上都没有使用索引
 
@@ -2820,7 +2821,7 @@ EXPLAIN SELECT L3.id FROM L3;
 EXPLAIN SELECT * FROM L3 WHERE title = 'ruyuan007';
 ```
 
-<img src="../02_图片/83.jpg" style="width:830px; height:80px"> 
+<img src="./02_图片/83.jpg" style="width:830px; height:80px"> 
 
 3. 理论和实际上都使用了索引
 
@@ -2828,7 +2829,7 @@ EXPLAIN SELECT * FROM L3 WHERE title = 'ruyuan007';
 EXPLAIN SELECT * FROM L2 WHERE title = 'ruyuan004';
 ```
 
-<img src="../02_图片/84.jpg" style="width:830px; height:80px"> 
+<img src="./02_图片/84.jpg" style="width:830px; height:80px"> 
 
 
 
@@ -2857,7 +2858,7 @@ key_len 字段能够帮你检查是否充分利用了索引   **ken_len 越长, 
 
   **观察key_len的值, 索引中只包含了1列 是int类型 ,所以,key_len是4字节。** 
 
-  <img src="../02_图片/85.jpg" style="width:830px; height:80px"> 
+  <img src="./02_图片/85.jpg" style="width:830px; height:80px"> 
 
 - 为b字段添加索引,进行测试
 
@@ -2870,7 +2871,7 @@ key_len 字段能够帮你检查是否充分利用了索引   **ken_len 越长, 
 
   **两列都使用了索引,所以,这里ken_len是8。** 
 
-  <img src="../02_图片/86.jpg" style="width:830px; height:80px"> 
+  <img src="./02_图片/86.jpg" style="width:830px; height:80px"> 
 
 - 为c、d字段添加联合索引,然后进行测试
 
@@ -2880,7 +2881,7 @@ key_len 字段能够帮你检查是否充分利用了索引   **ken_len 越长, 
   explain select * from L5 where c = 1 and d = ''; 
   ```
 
-  <img src="../02_图片/87.jpg" style="width:830px; height:80px"> 
+  <img src="./02_图片/87.jpg" style="width:830px; height:80px"> 
 
   **c字段是int类型 4个字节, d字段是 char(10)代表的是10个字符相当30个字节** 
 
@@ -2894,7 +2895,7 @@ key_len 字段能够帮你检查是否充分利用了索引   **ken_len 越长, 
   explain select * from L5 where c = 1 ; 
   ```
 
-  <img src="../02_图片/88.jpg" style="width:830px; height:80px"> 
+  <img src="./02_图片/88.jpg" style="width:830px; height:80px"> 
 
 **7) ref 字段说明**  
 
@@ -2906,7 +2907,7 @@ key_len 字段能够帮你检查是否充分利用了索引   **ken_len 越长, 
 EXPLAIN SELECT * FROM L1 WHERE  L1.id=1;
 ```
 
-<img src="../02_图片/89.jpg" style="width:830px; height:80px"> 
+<img src="./02_图片/89.jpg" style="width:830px; height:80px"> 
 
 
 
@@ -2920,7 +2921,7 @@ EXPLAIN SELECT * FROM L1 WHERE  L1.id=1;
 EXPLAIN SELECT * FROM L3,L4 WHERE L3.id = L4.id AND L3.title LIKE 'ruyuan007'; 
 ```
 
-<img src="../02_图片/90.jpg" style="width:830px; height:80px">  
+<img src="./02_图片/90.jpg" style="width:830px; height:80px">  
 
 > 需要注意的是 rows只是一个估算值,并不准确 .所以rows行数过大的问题并不值得过多考虑，主要分析的还是索引是否使用正确了
 
@@ -2965,7 +2966,7 @@ INSERT INTO users VALUES(NULL, 'sam', 13);
   EXPLAIN SELECT * FROM users ORDER BY age;
   ```
 
-  <img src="../02_图片/91.jpg" style="width:830px; height:80px"> 
+  <img src="./02_图片/91.jpg" style="width:830px; height:80px"> 
 
 - **Using temporary**
 
@@ -2975,7 +2976,7 @@ INSERT INTO users VALUES(NULL, 'sam', 13);
   EXPLAIN SELECT COUNT(*),uname FROM users GROUP BY uname;
   ```
 
-  <img src="../02_图片/92.jpg" style="width:830px; height:80px"> 
+  <img src="./02_图片/92.jpg" style="width:830px; height:80px"> 
 
 - **Using where**
 
@@ -2990,7 +2991,7 @@ INSERT INTO users VALUES(NULL, 'sam', 13);
   EXPLAIN SELECT * FROM users WHERE age=10;
   ```
 
-  <img src="../02_图片/93.jpg" style="width:830px; height:80px"> 
+  <img src="./02_图片/93.jpg" style="width:830px; height:80px"> 
 
 - **Using index**
 
@@ -3003,7 +3004,7 @@ INSERT INTO users VALUES(NULL, 'sam', 13);
   EXPLAIN SELECT uid,uname FROM users WHERE uname='lisa';
   ```
 
-  <img src="../02_图片/94.jpg" style="width:830px; height:80px"> 
+  <img src="./02_图片/94.jpg" style="width:830px; height:80px"> 
 
 - **Using join buffer**
 
@@ -3013,7 +3014,7 @@ INSERT INTO users VALUES(NULL, 'sam', 13);
   EXPLAIN SELECT * FROM users u1 LEFT JOIN (SELECT * FROM users WHERE age = 1) u2 ON u1.age = u2.age;
   ```
 
-  <img src="../02_图片/95.jpg" style="width:830px; height:80px">  
+  <img src="./02_图片/95.jpg" style="width:830px; height:80px">  
 
   `Using join buffer (Block Nested Loop)` 说明，需要进行嵌套循环计算, 这里每个表都有五条记录，内外表查询的type都为ALL。
 
@@ -3027,7 +3028,7 @@ INSERT INTO users VALUES(NULL, 'sam', 13);
   explain select * from L5 where c > 10 and d = ''; 
   ```
   
-  <img src="../02_图片/012.jpg" style="width:830px; height:80px"> 
+  <img src="./02_图片/012.jpg" style="width:830px; height:80px"> 
   
   
 
@@ -3082,7 +3083,7 @@ INSERT INTO users VALUES(NULL, 'sam', 13);
   AND user_age = 17 AND user_level = 'A';
   ```
 
-  <img src="../02_图片/96.jpg" style="width:830px; height:80px"> 
+  <img src="./02_图片/96.jpg" style="width:830px; height:80px"> 
 
   
 
@@ -3092,7 +3093,7 @@ INSERT INTO users VALUES(NULL, 'sam', 13);
   EXPLAIN SELECT * FROM users WHERE user_age = 17 AND user_level = 'A';
   ```
 
-  <img src="../02_图片/97.jpg" style="width:830px; height:70px">  
+  <img src="./02_图片/97.jpg" style="width:830px; height:70px">  
 
   
 
@@ -3103,7 +3104,7 @@ INSERT INTO users VALUES(NULL, 'sam', 13);
   user_age = 17 AND user_name = 'tom' AND user_level = 'A';
   ```
 
-  <img src="../02_图片/96.jpg" style="width:830px; height:80px"> 
+  <img src="./02_图片/96.jpg" style="width:830px; height:80px"> 
 
   
 
@@ -3117,7 +3118,7 @@ INSERT INTO users VALUES(NULL, 'sam', 13);
 
   所以: 最佳左前缀原则其实是和B+树的结构有关系, 最左字段肯定是有序的, 第二个字段则是无序的(**联合索引的排序方式是: 先按照第一个字段进行排序,如果第一个字段相等再根据第二个字段排序**). 所以如果直接使用第二个字段 `user_age` 通常是使用不到索引的.
 
-  <img src="../02_图片/006.jpg" style="width:630px; height:280px"> 
+  <img src="./02_图片/006.jpg" style="width:630px; height:280px"> 
 
 
 
@@ -3139,7 +3140,7 @@ INSERT INTO users VALUES(NULL, 'sam', 13);
   EXPLAIN SELECT * FROM users WHERE LEFT(user_name, 6) = '112233';
   ```
 
-  <img src="../02_图片/007.jpg" style="width:630px; height:80px"> 
+  <img src="./02_图片/007.jpg" style="width:630px; height:80px"> 
 
   
 
@@ -3151,7 +3152,7 @@ INSERT INTO users VALUES(NULL, 'sam', 13);
   EXPLAIN SELECT * FROM users WHERE user_name = 11223344;
   ```
 
-  <img src="../02_图片/015.jpg" style="width:830px; height:70px"> 
+  <img src="./02_图片/015.jpg" style="width:830px; height:70px"> 
 
   
 
@@ -3166,7 +3167,7 @@ INSERT INTO users VALUES(NULL, 'sam', 13);
   EXPLAIN SELECT * FROM users WHERE user_name = 'tom';
   ```
 
-  <img src="../02_图片/008.jpg" style="width:630px; height:80px"> 
+  <img src="./02_图片/008.jpg" style="width:630px; height:80px"> 
 
 - 场景2: 条件增加一个 user_age ( 使用常量等值) ,`type= ref`  ,  `key_len = 66`
 
@@ -3174,7 +3175,7 @@ INSERT INTO users VALUES(NULL, 'sam', 13);
   EXPLAIN SELECT * FROM users WHERE user_name = 'tom' AND user_age = 17;
   ```
 
-  <img src="../02_图片/009.jpg" style="width:630px; height:80px"> 
+  <img src="./02_图片/009.jpg" style="width:630px; height:80px"> 
 
 - 场景3: 使用全值匹配, `type = ref`  , `key_len = 128`  , 索引都利用上了.
 
@@ -3183,7 +3184,7 @@ INSERT INTO users VALUES(NULL, 'sam', 13);
   AND user_age = 17 AND user_level = 'A';
   ```
 
-  <img src="../02_图片/010.jpg" style="width:830px; height:80px"> 
+  <img src="./02_图片/010.jpg" style="width:830px; height:80px"> 
 
 - 场景4: 使用范围条件时, avg > 17 , `type = range`  ,  `key_len = 66`   , 与场景3 比较,可以发现 `user_level` 索引没有用上.
 
@@ -3192,9 +3193,9 @@ INSERT INTO users VALUES(NULL, 'sam', 13);
   AND user_age > 17 AND user_level = 'A';
   ```
 
-  <img src="../02_图片/011.jpg" style="width:830px; height:80px"> 
+  <img src="./02_图片/011.jpg" style="width:830px; height:80px"> 
 
-  <img src="../02_图片/013.jpg" style="width:830px; height:90px">  
+  <img src="./02_图片/013.jpg" style="width:830px; height:90px">  
 
   
 
@@ -3206,7 +3207,7 @@ INSERT INTO users VALUES(NULL, 'sam', 13);
   EXPLAIN SELECT * FROM users WHERE user_name IS NULL;
   ```
 
-  <img src="../02_图片/014.jpg" style="width:830px; height:80px"> 
+  <img src="./02_图片/014.jpg" style="width:830px; height:80px"> 
 
   > Impossible Where:  表示where条件不成立, 不能返回任何行
 
@@ -3216,7 +3217,7 @@ INSERT INTO users VALUES(NULL, 'sam', 13);
   EXPLAIN SELECT * FROM users WHERE user_name IS NOT NULL;
   ```
 
-  <img src="../02_图片/015.jpg" style="width:830px; height:70px"> 
+  <img src="./02_图片/015.jpg" style="width:830px; height:70px"> 
 
 - 使用 `!=`  和 `or` 会使索引失效
 
@@ -3226,7 +3227,7 @@ INSERT INTO users VALUES(NULL, 'sam', 13);
   EXPLAIN SELECT * FROM users WHERE user_name = 'tom' or user_name = 'jack';
   ```
 
-  <img src="../02_图片/015.jpg" style="width:830px; height:70px"> 
+  <img src="./02_图片/015.jpg" style="width:830px; height:70px"> 
 
 
 
@@ -3242,7 +3243,7 @@ like查询为范围查询，%出现在左边，则索引失效。%出现在右�
   EXPLAIN SELECT * FROM users WHERE user_name LIKE '%tom';
   ```
 
-  <img src="../02_图片/016.jpg" style="width:830px; height:70px"> 
+  <img src="./02_图片/016.jpg" style="width:830px; height:70px"> 
 
   
 
@@ -3252,7 +3253,7 @@ like查询为范围查询，%出现在左边，则索引失效。%出现在右�
   EXPLAIN SELECT * FROM users WHERE user_name LIKE 'tom%';
   ```
 
-  <img src="../02_图片/017.jpg" style="width:830px; height:70px">
+  <img src="./02_图片/017.jpg" style="width:830px; height:70px">
 
 
 
@@ -3266,7 +3267,7 @@ like查询为范围查询，%出现在左边，则索引失效。%出现在右�
   EXPLAIN SELECT user_name,user_age,user_level FROM users WHERE user_name LIKE '%jack%';
   ```
 
-  <img src="../02_图片/018.jpg" style="width:830px; height:70px">
+  <img src="./02_图片/018.jpg" style="width:830px; height:70px">
 
   对比场景1可以知道, 通过使用覆盖索引 `type = index`,并且 `extra = Using index`,从全表扫描变成了全索引扫描.
 
@@ -3633,7 +3634,7 @@ JOIN 是 MySQL 用来进行联表操作的，用来匹配两个表的数据，�
 
 JOIN 操作有多种方式，取决于最终数据的合并效果。常用连接方式的有以下几种:
 
-<img src="../02_图片/99.jpg" style="width:530px; height:270px"> 
+<img src="./02_图片/99.jpg" style="width:530px; height:270px"> 
 
 
 
@@ -3680,7 +3681,7 @@ JOIN 操作有多种方式，取决于最终数据的合并效果。常用连接
 
 - 匹配过程如下图
 
-  <img src="../02_图片/100.jpg" style="width:630px; height:270px"> 
+  <img src="./02_图片/100.jpg" style="width:630px; height:270px"> 
 
 - SNL 的特点
   - 简单粗暴容易理解，就是通过双层循环比较数据来获得结果
@@ -3702,7 +3703,7 @@ JOIN 操作有多种方式，取决于最终数据的合并效果。常用连接
 
 - 当  `order`  表的   `user_id`  为索引的时候执行过程会如下图：
 
-   <img src="../02_图片/102.jpg" style="width:630px; height:270px"> 
+   <img src="./02_图片/102.jpg" style="width:630px; height:270px"> 
 
   **注意：使用Index Nested-Loop Join 算法的前提是匹配的字段必须建立了索引。** 
 
@@ -3714,7 +3715,7 @@ JOIN 操作有多种方式，取决于最终数据的合并效果。常用连接
 
 - 因为不存在索引了，所以被驱动表需要进行扫描。这里 MySQL 并不会简单粗暴的应用 SNL 算法，而是加入了 buffer 缓冲区，降低了内循环的个数，也就是被驱动表的扫描次数。
 
-  <img src="../02_图片/103.jpg" style="width:630px; height:270px"> 
+  <img src="./02_图片/103.jpg" style="width:630px; height:270px"> 
 
   - 在外层循环扫描 user表中的所有记录。扫描的时候，会把需要进行 join 用到的列都缓存到 buffer 中。buffer 中的数据有一个特点，里面的记录不需要一条一条地取出来和 order 表进行比较，而是整个 buffer 和 order表进行批量比较。
 
@@ -3805,7 +3806,7 @@ SELECT * FROM employee e WHERE e.dep_id IN (SELECT id FROM department);
 
   2. 检查 `department`  表中的id与 `employee` 表中的    `dep_id` 是否相等, 如果相等 添加到结果集, 直到遍历完`department`  所有的记录.
 
-  <img src="../02_图片/028.jpg" style="width:630px; height:270px"> 
+  <img src="./02_图片/028.jpg" style="width:630px; height:270px"> 
   
   ```SQL 
   -- 先循环: select id from department; 相当于得到了小表的数据
@@ -3839,7 +3840,7 @@ SELECT * FROM employee e WHERE e.dep_id IN (SELECT id FROM department);
 
   如果结果为 `true`  , 外层的查询语句会进行匹配,否则 外层查询语句将不进行查询或者查不出任何记录。
 
-  <img src="../02_图片/104.jpg" style="width:630px; height:80px"> 
+  <img src="./02_图片/104.jpg" style="width:630px; height:80px"> 
 
 - exists 函数的执行原理
 
@@ -3879,7 +3880,7 @@ MySQL中的两种排序方式
 
 因为索引的结构是B+树，索引中的数据是按照一定顺序进行排列的，所以在排序查询中如果能利用索引，就能避免额外的排序操作。EXPLAIN分析查询时，Extra显示为Using index。
 
-<img src="../02_图片/105.jpg" style="width:630px; height:280px"> 
+<img src="./02_图片/105.jpg" style="width:630px; height:280px"> 
 
 比如查询条件是 `where age = 21 order by name`，那么查询过程就是会找到满足 `age = 21` 的记录，而符合这条的所有记录一定是按照 name 排序的，所以也不需要额外进行排序.
 
@@ -3946,7 +3947,7 @@ mysql> show variables like 'max_length_for_sort_data';
 select name,age,add from user where addr = '北京' order by name limit 1000; -- addr有索引
 ```
 
-<img src="../02_图片/107.jpg" style="width:630px; height:380px">  
+<img src="./02_图片/107.jpg" style="width:630px; height:380px">  
 
 上面查询语句的执行流程:
 
@@ -3981,7 +3982,7 @@ select name,age,add from user where addr = '北京' order by name limit 1000; --
 假设 name、age、addr3个字段定义的总长度为36，而 max_length_for_sort_data = 16，就是单行的长度超了，MySQL认为单行太大，需要换一个算法。
 放入 sort_buffer 的字段就会只有要排序的字段 name，和主键 id，那么排序的结果中就少了 addr 和 age，就需要回表了。
 
-<img src="../02_图片/108.jpg" style="width:630px; height:380px"> 
+<img src="./02_图片/108.jpg" style="width:630px; height:380px"> 
 
 上面查询语句的执行流程:
 
@@ -4020,7 +4021,7 @@ select name,age,add from user where addr = '北京' order by name limit 1000; --
   SHOW INDEX FROM employee; 
   ```
 
-  <img src="../02_图片/020.jpg" style="width:730px; height:150px"> 
+  <img src="./02_图片/020.jpg" style="width:730px; height:150px"> 
 
 **场景1:  只查询用于排序的 索引字段, 可以利用索引进行排序,最左原则 ** 
 
@@ -4030,7 +4031,7 @@ select name,age,add from user where addr = '北京' order by name limit 1000; --
   EXPLAIN SELECT e.name, e.age FROM employee e ORDER BY e.name,e.age;
   ```
 
-  <img src="../02_图片/021.jpg" style="width:730px; height:100px"> 
+  <img src="./02_图片/021.jpg" style="width:730px; height:100px"> 
 
 **场景2:  排序字段在多个索引中,无法使用索引排序**
 
@@ -4040,7 +4041,7 @@ select name,age,add from user where addr = '北京' order by name limit 1000; --
   EXPLAIN SELECT e.name, e.salary FROM employee e ORDER BY e.name,e.salary;
   ```
 
-  <img src="../02_图片/022.jpg" style="width:730px; height:100px">
+  <img src="./02_图片/022.jpg" style="width:730px; height:100px">
 
 **场景3: 只查询用于排序的索引字段和主键, 可以利用索引进行排序**
 
@@ -4050,7 +4051,7 @@ select name,age,add from user where addr = '北京' order by name limit 1000; --
   EXPLAIN SELECT e.id, e.name FROM employee e ORDER BY e.name;
   ```
 
-  <img src="../02_图片/110.jpg" style="width:730px; height:100px"> 
+  <img src="./02_图片/110.jpg" style="width:730px; height:100px"> 
 
 **场景4: 查询主键之外的没有添加索引的字段，不会利用索引排序**
 
@@ -4062,7 +4063,7 @@ select name,age,add from user where addr = '北京' order by name limit 1000; --
   EXPLAIN SELECT * FROM employee e ORDER BY e.name;
   ```
 
-  <img src="../02_图片/022.jpg" style="width:730px; height:100px">
+  <img src="./02_图片/022.jpg" style="width:730px; height:100px">
 
 **场景5: 排序字段顺序与索引列顺序不一致,无法利用索引排序**
 
@@ -4072,7 +4073,7 @@ select name,age,add from user where addr = '北京' order by name limit 1000; --
   EXPLAIN SELECT e.name, e.age FROM employee e ORDER BY e.age,e.name;
   ```
 
-  <img src="../02_图片/024.jpg" style="width:730px; height:100px"> 
+  <img src="./02_图片/024.jpg" style="width:730px; height:100px"> 
 
 **场景6: where 条件是 范围查询时, 会使order by  索引 失效 **
 
@@ -4082,7 +4083,7 @@ select name,age,add from user where addr = '北京' order by name limit 1000; --
   EXPLAIN SELECT e.name, e.age FROM employee e WHERE e.age > 10 ORDER BY e.age;
   ```
 
-  <img src="../02_图片/025.jpg" style="width:730px; height:100px">  
+  <img src="./02_图片/025.jpg" style="width:730px; height:100px">  
 
 - **注意: ORDERBY子句不要求必须索引中第一列,没有仍然可以利用索引排序。但是有个前提条件，只有在等值过滤时才可以，范围查询时不**
 
@@ -4090,7 +4091,7 @@ select name,age,add from user where addr = '北京' order by name limit 1000; --
   EXPLAIN SELECT e.name, e.age FROM employee e WHERE e.age = 18 ORDER BY e.age;
   ```
 
-  <img src="../02_图片/026.jpg" style="width:730px; height:100px"> 
+  <img src="./02_图片/026.jpg" style="width:730px; height:100px"> 
 
 **场景7: 升降序不一致,无法利用索引排序**
 
@@ -4104,7 +4105,7 @@ select name,age,add from user where addr = '北京' order by name limit 1000; --
   EXPLAIN SELECT e.name, e.age FROM employee e ORDER BY e.name DESC, e.age DESC;
   ```
 
-  <img src="../02_图片/110.jpg" style="width:730px; height:100px"> 
+  <img src="./02_图片/110.jpg" style="width:730px; height:100px"> 
 
 - name字段升序,age字段降序,索引失效
 
@@ -4112,7 +4113,7 @@ select name,age,add from user where addr = '北京' order by name limit 1000; --
   EXPLAIN SELECT e.name, e.age FROM employee e ORDER BY e.name, e.age DESC;
   ```
 
-  <img src="../02_图片/027.jpg" style="width:730px; height:100px"> 
+  <img src="./02_图片/027.jpg" style="width:730px; height:100px"> 
 
 ### 索引优化实战
 
@@ -4153,7 +4154,7 @@ SELECT NAME, mobile FROM  user_contacts WHERE NAME LIKE '李%' ORDER BY user_id;
 EXPLAIN SELECT NAME, mobile FROM  user_contacts WHERE NAME LIKE '%李%' ORDER BY user_id;
 ```
 
-<img src="../02_图片/111.jpg" style="width:830px; height:80px"> 
+<img src="./02_图片/111.jpg" style="width:830px; height:80px"> 
 
 - 分析的结果显示: type=ALL 是最坏的情况,并且Extra中还出现了 Using FIlesort(文件排序未使用到索引),所以必须优化
 
@@ -4171,7 +4172,7 @@ ALTER TABLE user_contacts ADD INDEX idx_nmu(NAME,mobile,user_id);
 EXPLAIN SELECT NAME, mobile FROM  user_contacts WHERE NAME LIKE '%李%' ORDER BY user_id;
 ```
 
- <img src="../02_图片/114.jpg" style="width:830px; height:80px">
+ <img src="./02_图片/114.jpg" style="width:830px; height:80px">
 
 3. 分析结果显示: type连接类型提升到了index级别,通过索引就获取到了全部数据,但是Extra字段中还是存在 Using filesort. 
 
@@ -4191,7 +4192,7 @@ EXPLAIN SELECT NAME, mobile FROM  user_contacts WHERE NAME LIKE '%李%' ORDER BY
    EXPLAIN SELECT NAME, mobile FROM  user_contacts WHERE NAME LIKE '%李%' ORDER BY user_id;
    ```
 
-   <img src="../02_图片/113.jpg" style="width:830px; height:80px"> 
+   <img src="./02_图片/113.jpg" style="width:830px; height:80px"> 
 
 **需求二:**
 
@@ -4204,7 +4205,7 @@ EXPLAIN SELECT NAME, mobile FROM  user_contacts WHERE NAME LIKE '%李%' ORDER BY
 
 - 通过explain命令 查看SQL查询优化信息
 
-  <img src="../02_图片/115.jpg" style="width:830px; height:80px"> 
+  <img src="./02_图片/115.jpg" style="width:830px; height:80px"> 
 
   `type=index` : 用到了索引,但是进行了索引全表扫描
 
@@ -4229,7 +4230,7 @@ EXPLAIN SELECT NAME, mobile FROM  user_contacts WHERE NAME LIKE '%李%' ORDER BY
    WHERE mobile LIKE '135%' OR mobile LIKE '136%' OR mobile LIKE '186%' OR mobile LIKE '187%';
    ```
 
-   <img src="../02_图片/116.jpg" style="width:830px; height:100px"> 
+   <img src="./02_图片/116.jpg" style="width:830px; height:100px"> 
 
    `type=range`: 使用了索引进行范围查询,常见于使用>，>=，<，<=，BETWEEN，IN() 或者 like 等运算符的查询中。 
 
@@ -4271,7 +4272,7 @@ WHERE mobile LIKE '135%' OR mobile LIKE '136%' OR mobile LIKE '186%' OR mobile L
   EXPLAIN SELECT NAME,mobile FROM user_contacts  WHERE DATE_FORMAT(create_date,'%Y-%m-%d')='2017-02-16';
   ```
 
-  <img src="../02_图片/117.jpg" style="width:830px; height:80px"> 
+  <img src="./02_图片/117.jpg" style="width:830px; height:80px"> 
 
 **优化:** 
 
@@ -4284,7 +4285,7 @@ WHERE mobile LIKE '135%' OR mobile LIKE '136%' OR mobile LIKE '186%' OR mobile L
   BETWEEN '2017-02-16 00:00:00' AND '2017-02-16 23:59:59';
   ```
 
-   <img src="../02_图片/029.jpg" style="width:830px; height:90px"> 
+   <img src="./02_图片/029.jpg" style="width:830px; height:90px"> 
 
   添加索引后,发现并没有使用到索引 `key=null` 
 
@@ -4301,7 +4302,7 @@ WHERE mobile LIKE '135%' OR mobile LIKE '136%' OR mobile LIKE '186%' OR mobile L
   BETWEEN '2017-02-16 00:00:00' AND '2017-02-16 23:59:59';
   ```
 
-  <img src="../02_图片/030.jpg" style="width:930px; height:80px"> 
+  <img src="./02_图片/030.jpg" style="width:930px; height:80px"> 
 
   `type=range` : 使用了索引进行范围查询 
 
@@ -4324,7 +4325,7 @@ WHERE mobile LIKE '135%' OR mobile LIKE '136%' OR mobile LIKE '186%' OR mobile L
   EXPLAIN SELECT * FROM user_contacts uc LIMIT 3000000,100000;
   ```
 
-  <img src="../02_图片/119.jpg" style="width:830px; height:90px"> 
+  <img src="./02_图片/119.jpg" style="width:830px; height:90px"> 
 
 - LIMIT 子句可以被用于指定 SELECT 语句返回的记录数。需注意以下几点：
 
@@ -4348,7 +4349,7 @@ WHERE mobile LIKE '135%' OR mobile LIKE '136%' OR mobile LIKE '186%' OR mobile L
   EXPLAIN SELECT * FROM user_contacts WHERE id  >= 100001 LIMIT 100;
   ```
 
-  <img src="../02_图片/037.jpg" style="width:830px; height:90px"> 
+  <img src="./02_图片/037.jpg" style="width:830px; height:90px"> 
 
   - type类型提升到了 range级别
 
@@ -4363,7 +4364,7 @@ WHERE mobile LIKE '135%' OR mobile LIKE '136%' OR mobile LIKE '186%' OR mobile L
   (SELECT id FROM user_contacts LIMIT 100000,1) LIMIT 100;
   ```
 
-  <img src="../02_图片/038.jpg" style="width:830px; height:80px">  
+  <img src="./02_图片/038.jpg" style="width:830px; height:80px">  
 
 
 
@@ -4475,7 +4476,7 @@ CREATE TABLE `loan_apply` (
   on ma.user_id = ucp.user_id;
   ```
 
-  <img src="../02_图片/031.jpg" style="width:930px; height:60px"> 
+  <img src="./02_图片/031.jpg" style="width:930px; height:60px"> 
 
   - type 类型都是ALL, 使用了全表扫描
 
@@ -4487,7 +4488,7 @@ CREATE TABLE `loan_apply` (
   alter table mob_autht add index idx_user_id(user_id);
   ```
 
-  <img src="../02_图片/121.jpg" style="width:930px; height:60px"> 
+  <img src="./02_图片/121.jpg" style="width:930px; height:60px"> 
 
   - 根据小结果及驱动大结果集的原则, `mob_autht`  是驱动表,驱动表即使建立索引也不会生效.
 
@@ -4503,7 +4504,7 @@ CREATE TABLE `loan_apply` (
   ALTER TABLE ugncy_cntct_psn ADD INDEX idx_userid(user_id); 
   ```
 
-  <img src="../02_图片/034.jpg" style="width:930px; height:60px">
+  <img src="./02_图片/034.jpg" style="width:930px; height:60px">
 
   - `mob_autht` 的type类型为ALL, `ugncy_cntct_psn`的type类型是ref
   
@@ -4531,7 +4532,7 @@ CREATE TABLE `loan_apply` (
   GROUP BY ucp.user_id HAVING COUNT(ucp.user_id) > 8 ;
   ```
 
-  <img src="../02_图片/035.jpg" style="width:930px; height:70px"> 
+  <img src="./02_图片/035.jpg" style="width:930px; height:70px"> 
 
   - `Using temporary` : MySQL 创建了临时表,来保存结果.
   - `Using filesort` : 使用了文件排序
@@ -4549,7 +4550,7 @@ CREATE TABLE `loan_apply` (
   GROUP BY ucp.user_id HAVING COUNT(ucp.user_id) > 8 ORDER BY NULL;
   ```
 
-  <img src="../02_图片/036.jpg" style="width:930px; height:70px"> 
+  <img src="./02_图片/036.jpg" style="width:930px; height:70px"> 
 
 **需求三:** 
 
@@ -4565,7 +4566,7 @@ CREATE TABLE `loan_apply` (
   WHERE la.audit_mod_cde = '2'; 
   ```
 
-  <img src="../02_图片/039.jpg" style="width:930px; height:70px">
+  <img src="./02_图片/039.jpg" style="width:930px; height:70px">
 
 - 优化分析
 
@@ -4577,7 +4578,7 @@ CREATE TABLE `loan_apply` (
     ALTER TABLE loan_apply ADD INDEX idx_amc(audit_mod_cde); 
     ```
 
-    <img src="../02_图片/040.jpg" style="width:930px; height:70px"> 
+    <img src="./02_图片/040.jpg" style="width:930px; height:70px"> 
 
     添加索引后type的类型确实提升了,但是需要注意的扫描的行还是很高,并且 Extra字段的值为 `Using where` 表示: 通过索引访问时,需要再回表访问所需的数据.
 
@@ -4617,7 +4618,7 @@ CREATE TABLE `loan_apply` (
     AND  '2017-01-05 23:59:59' AND la.audit_mod_cde = '2';  
     ```
 
-    <img src="../02_图片/120.jpg" style="width:800px; height:70px"> 
+    <img src="./02_图片/120.jpg" style="width:800px; height:70px"> 
 
     `extra = Using index condition;` : 只有一部分索引生效
 
@@ -4635,7 +4636,7 @@ CREATE TABLE `loan_apply` (
 
 原子性：事务是一个原子操作单元，其对数据的修改，要么全都执行，要么全都不执行。
 
-<img src="../02_图片/123.jpg" style="width:700px; height:400px">  
+<img src="./02_图片/123.jpg" style="width:700px; height:400px">  
 
 每写一个事务,都会修改Buffer Pool,从而产生响应的Redo/Undo日志:
 
@@ -4656,7 +4657,7 @@ MySQL持久性的保证依赖两个日志文件: `redo log` 和 `binlog`
 update T set c = c+1 where ID = 2
 ```
 
- <img src="../02_图片/125.jpg" style="width:700px; height:550px">  
+ <img src="./02_图片/125.jpg" style="width:700px; height:550px">  
 
 1. 执行器先找引擎取 ID=2 这一行。ID 是主键，引擎直接用树搜索找到这一行。如果 ID=2 这一行所在的数据页本来就在内存中，就直接返回给执行器；否则，需要先从磁盘读入内存，然后再返回。
 2. 执行器拿到引擎给的行数据，把这个值加上 1，比如原来是 N，现在就是 N+1，得到新的一行数据，再调用引擎接口写入这行新数据。
@@ -4668,7 +4669,7 @@ update T set c = c+1 where ID = 2
 
 将 redo log 的写入拆成了两个步骤：prepare 和 commit，这就是两阶段提交（2PC）。
 
-<img src="../02_图片/126.jpg" style="width:700px; height:500px"> 
+<img src="./02_图片/126.jpg" style="width:700px; height:500px"> 
 
 
 
@@ -4717,7 +4718,7 @@ InnoDB 支持的隔离性有 4 种，隔离性从低到高分别为：读未提�
 
 一致性也可以理解为数据的完整性。数据的完整性是通过原子性、隔离性、持久性来保证的，而这3个特性又是通过 Redo/Undo 来保证的。逻辑上的一致性，包括唯一索引、外键约束、check 约束，这属于业务逻辑范畴。
 
-<img src="../02_图片/128.jpg" style="width:700px; height:200px"> 
+<img src="./02_图片/128.jpg" style="width:700px; height:200px"> 
 
 #### 5.ACID的关系
 
@@ -4726,7 +4727,7 @@ InnoDB 支持的隔离性有 4 种，隔离性从低到高分别为：读未提�
 - 在非并发状态下，事务间天然保证隔离性，因此只需要保证事务的原子性即可保证一致性.
 - 在并发状态下，需要严格保证事务的原子性、隔离性。
 
-<img src="../02_图片/129.jpg" style="width:700px; height:400px"> 
+<img src="./02_图片/129.jpg" style="width:700px; height:400px"> 
 
 ### 事务控制的演进
 
@@ -4734,13 +4735,13 @@ InnoDB 支持的隔离性有 4 种，隔离性从低到高分别为：读未提�
 
 排队处理是事务管理最简单的方法，就是完全顺序执行所有事务的数据库操作，不需要加锁，简单的说就是全局排队。序列化执行所有的事务单元，数据库某个时刻只处理一个事务操作，特点是强一致性，处理性能低。
 
-<img src="../02_图片/130.jpg" style="width:700px; height:200px"> 
+<img src="./02_图片/130.jpg" style="width:700px; height:200px"> 
 
 #### 2. 排它锁
 
 引入锁之后就可以支持并发处理事务，如果事务之间涉及到相同的数据项时，会使用排他锁，或叫互斥锁，先进入的事务独占数据项以后，其他事务被阻塞，等待前面的事务释放锁。
 
-<img src="../02_图片/131.jpg" style="width:700px; height:300px"> 
+<img src="./02_图片/131.jpg" style="width:700px; height:300px"> 
 
 注意，在整个事务1结束之前，锁是不会被释放的，所以，事务2必须等到事务1结束之后开始。
 
@@ -4750,7 +4751,7 @@ InnoDB 支持的隔离性有 4 种，隔离性从低到高分别为：读未提�
 
 读写锁就是进一步细化锁的颗粒度，区分读操作和写操作，让读和读之间不加锁，这样下面的两个事务就可以同时被执行了。
 
-<img src="../02_图片/132.jpg" style="width:700px; height:300px"> 
+<img src="./02_图片/132.jpg" style="width:700px; height:300px"> 
 
 读写锁，可以让读和读并行，而读和写、写和读、写和写这几种之间还是要加排他锁。
 
@@ -4780,15 +4781,15 @@ MVCC最大的好处是读不加锁，读写不冲突。在读多写少的系统�
 
 1. 假设有一个事务A (trx_id=50) ,向表中插入一条数据,插入的这条数据的值为A,则插入的这条数据结构如下,其中roll_pointer会指向一个空的undo log:
 
-   <img src="../02_图片/134.jpg" style="width:600px; height:200px"> 
+   <img src="./02_图片/134.jpg" style="width:600px; height:200px"> 
 
 2. 接着又有一个事务B (trx_id=58) 过来,对同一条数据进行修改,将值改为B,事务B的id是58,在更新之前会生成一个undo log来记录之前的值.然后会让roll_pointer指向这个实际的undo log回滚日志:
 
-    <img src="../02_图片/135.jpg" style="width:580px; height:230px"> 
+    <img src="./02_图片/135.jpg" style="width:580px; height:230px"> 
 
 3. 如果再有一个事务C (trx_id=69) 继续更新该条记录值为C,则会跟第二步的步骤一样,
 
-   <img src="../02_图片/136.jpg" style="width:580px; height:230px"> 
+   <img src="./02_图片/136.jpg" style="width:580px; height:230px"> 
 
 总结: **每一条数据都有多个版本,版本之间通过undo log链条进行连接** 
 
@@ -4818,38 +4819,38 @@ Read View中比较重要的字段有4个:
 **Read View 的使用**
 
 下面是一个Read View所存储的信息:
-<img src="../02_图片/137.jpg" style="width:380px; height:330px">  
+<img src="./02_图片/137.jpg" style="width:380px; height:330px">  
 
 我们一起来看下面的这个例子:
 
 1. 假设数据库有一行数据,很早就有事务操作过,事务id 是32. 此时两个事务并发过来执行了, 一个事务A (id=45),一个事务B (id=59). 事务A需要读取数据,而事务B需要更新数据,如下图:
 
-   <img src="../02_图片/152.jpg" style="width:580px; height:230px">   
+   <img src="./02_图片/152.jpg" style="width:580px; height:230px">   
 
    > 如果不加任何限制,这里会出现脏读的情况,也就是一个事务可能会读到一个没有提交的值.
 
 2. 现在事务A直接开启一个ReadView，这个ReadView里的`m_ids`就包含了事务A和事务B的两个id，45和59，然后`min_trx_id`就是45，`max_trx_id`就是60.  `creator_trx_id`就是45，是事务A自己。
 
-   <img src="../02_图片/153.jpg" style="width:380px; height:250px">  
+   <img src="./02_图片/153.jpg" style="width:380px; height:250px">  
 
 3. 此时事务A第一次查询这行数据，首先会判断一下当前这行数据的`txr_id`是否小于ReadView中的`min_trx_id`，此时发现txr_id=32，是小于ReadView里的`min_trx_id`就是45的，说明你事务开启之前，修改这行数据的事务已经提交了，所以此时可以查到这行数据，如下图所示:
 
-   <img src="../02_图片/155.jpg" style="width:780px; height:250px">  
+   <img src="./02_图片/155.jpg" style="width:780px; height:250px">  
 
 4. 接下来事务B开始操作该条数据,他把这行数据的值修改为了值B,然后将这行数据的`txr_id`设置为自己的id,也就是59，同时`roll_pointer`指向了修改之前生成的一个undo log，然后事务B提交,如下图所示:
 
-   <img src="../02_图片/156.jpg" style="width:580px; height:250px">  
+   <img src="./02_图片/156.jpg" style="width:580px; height:250px">  
 
 5. 这时事务A再次执行了查询,但是却发现数据行里的txr_id=59，也就是这个txr_id是大于ReadView里的min_txr_id(45),同时小于ReadView里的max_trx_id（60）的，说明更新这条数据的事务，很可能就跟自己差不多同时开启的,于是会看一下这个txr_id=59,是否在ReadView的m_ids列表里？
    果然,在ReadView的m_ids列表里,有45和59两个事务id，直接证实了，这个修改数据的事务是跟自己同一时段并发执行然后提交的，所以对这行数据是不能查询的！如下图所示:
 
-   <img src="../02_图片/157.jpg" style="width:780px; height:250px">  
+   <img src="./02_图片/157.jpg" style="width:780px; height:250px">  
 
 6. 通过上面的判断,事务A就知道这条数据不是他改的,不能查.所以要根据roll_point顺着undo log版本链向下找,找到最近的一条undo log,trx_id是32，此时发现trx_id=32，是小于ReadView里的min_trx_id（45）的，说明这个undo log版本
    必然是在事务A开启之前就执行且提交的。
    那么就查询最近的那个undo log里的值就可以了,这时undo log版本链的作用就体现出来了,它相当于保存了一条快照链条,而事务A读取到的数据,就是之前的快照数据.
 
-   <img src="../02_图片/158.jpg" style="width:680px; height:350px">  
+   <img src="./02_图片/158.jpg" style="width:680px; height:350px">  
 
 
 
@@ -4867,7 +4868,7 @@ Read View中比较重要的字段有4个:
 
    首先事务B修改这条数据, trx_id被设置为70,同时会生成一条undo log,由roll_point来指向.然后事务A发起一次查询操作,生成一个read view,如下图:
 
-   <img src="../02_图片/159.jpg" style="width:880px; height:300px">   
+   <img src="./02_图片/159.jpg" style="width:880px; height:300px">   
 
 2. 接着事务A会发起查询,发现当前这条数据的trx_id=70
 
@@ -4877,13 +4878,13 @@ Read View中比较重要的字段有4个:
 
    > 根据read view机制的规则: 当前数据的trx_id小于min_trx_id,表示这条数据是在当前事务开启之前,其他事务就已经操作了该条数据,并且提交了事务,所以当前事务能读到这个快照数据.
 
-    <img src="../02_图片/160.jpg" style="width:880px; height:350px">  
+    <img src="./02_图片/160.jpg" style="width:880px; height:350px">  
 
 3. 接着事务B提交了,事务B一旦提交,那么事务A下次再查询的时候,就可以读到事务B修改过的值了.
 
    如何保证事务A可以读取到已经提交的事务B的数据呢? 其实很简单,就是事务A再次查询时 会生成一个新的read view,如下图:
 
-   <img src="../02_图片/161.jpg" style="width:780px; height:350px">  
+   <img src="./02_图片/161.jpg" style="width:780px; height:350px">  
 
    **以上就是基于ReadView实现RC隔离级别的原理,其本质就是协调你多个事务并发运行的时候,并发的读写同一批数据,此时应该如何协调互相的可见性。**  
 
@@ -4899,7 +4900,7 @@ Read View中比较重要的字段有4个:
 
 根据规则事务A可以查询到数据,因为数据的trx_id=50,小于min_trx_id.
 
-<img src="../02_图片/163.jpg" style="width:780px; height:250px">  
+<img src="./02_图片/163.jpg" style="width:780px; height:250px">  
 
 
 
@@ -4909,7 +4910,7 @@ Read View中比较重要的字段有4个:
 
    找到了trx_id=50的这个版本的数据,50小于min_trx_id,说明开启之前已经提交了,可以查询到.
 
-   <img src="../02_图片/162.jpg" style="width:780px; height:350px">  
+   <img src="./02_图片/162.jpg" style="width:780px; height:350px">  
 
 3. 至此事务A多次读同一个数据，每次读到的都是一样的值，除非是他自己修改了值，否则读到的一直会一样的值,这就是RR级别的实现原理.
 
@@ -5097,7 +5098,7 @@ set tx_isolation='SERIALIZABLE';
 
 除了上面说的三个问题,还有一个脏写的问题, 就是当多个事务同时并发对一条数据进行更新时,这时就可能会出现脏写问题,如下图.
 
-<img src="../02_图片/165.jpg" style="width:580px; height:230px"> 
+<img src="./02_图片/165.jpg" style="width:580px; height:230px"> 
 
 1. 事务A开启事务 对数据进行操作,将值修改为 A
 2. 事务B也对该数据进行操作,将值修改为了B
@@ -5116,7 +5117,7 @@ set tx_isolation='SERIALIZABLE';
 - 行级锁：每次操作锁住一行数据。锁定粒度最小，发生锁冲突的概率最低，并发度最高。应用在InnoDB 存储引擎中。
 - 页级锁：每次锁定相邻的一组记录，锁定粒度界于表锁和行锁之间，开销和加锁时间界于表锁和行锁之间，并发度一般。应用在BDB 存储引擎中。
 
-<img src="../02_图片/164.jpg" style="width:580px; height:180px"> 
+<img src="./02_图片/164.jpg" style="width:580px; height:180px"> 
 
 
 
@@ -5443,7 +5444,7 @@ InnoDB行锁的类型
 - 共享锁只能兼容共享锁, 不兼容排它锁
 - 排它锁互斥共享锁和其它排它锁
 
-<img src="../02_图片/167.jpg" style="width:580px; height:230px"> 
+<img src="./02_图片/167.jpg" style="width:580px; height:230px"> 
 
 
 
@@ -6093,7 +6094,7 @@ commit;
 
 - 因为产生了间隙锁, number( 1 - 8 )的间隙中,插入语句都被阻塞了,而不在这个范围内的语句,都是正常执行.
 
-<img src="../02_图片/168.jpg" style="width:250px; height:200px"> 
+<img src="./02_图片/168.jpg" style="width:250px; height:200px"> 
 
 
 
@@ -6152,7 +6153,7 @@ commit;
 
 - 通过下图分析一下阻塞的原因:
 
-<img src="../02_图片/170.jpg" style="width:450px; height:500px"> 
+<img src="./02_图片/170.jpg" style="width:450px; height:500px"> 
 
 1. 原始数据Id值为: 1,5,7,11 ,原始数据number值为: 1,3,8,12
 2. 事务3添加 id=6,number=8,这条数据是在(3,8) 的区间里边,所以被阻塞
@@ -6375,7 +6376,7 @@ Query OK, 1 row affected (0.00 sec)
 
 接下来对user表 进行一些事务性操作, 如下图所示,: 
 
-<img src="../02_图片/173.jpg" style="width:950px; height:500px">  
+<img src="./02_图片/173.jpg" style="width:950px; height:500px">  
 
 1. 事务1中执行三次查询,都是要查出name="Jack"的记录行,这里我们假设name=Jack的这条数据行上加了行锁.
 2. 第一次查询就只返回了 id = 1 这一行
@@ -6387,7 +6388,7 @@ Query OK, 1 row affected (0.00 sec)
 
 我们继续分析下面这个场景:
 
-<img src="../02_图片/174.jpg" style="width:950px; height:500px"> 
+<img src="./02_图片/174.jpg" style="width:950px; height:500px"> 
 
 1. 我们在事务2中 再添加一条SQL语句,把id=2的这一行数据的age字段改为 age=40,需要注意的是这行数据的name="Jack".
 
@@ -6399,7 +6400,7 @@ Query OK, 1 row affected (0.00 sec)
 
 接下来我们在给事务1加上一条SQL语句:
 
-<img src="../02_图片/175.jpg" style="width:950px; height:500px"> 
+<img src="./02_图片/175.jpg" style="width:950px; height:500px"> 
 
 在上图的四个时刻中:
 
@@ -6438,7 +6439,7 @@ update user set name = "Tom" where name = "Jack"
 
 那我们再假设事务1 加锁的范围是所有的行, 这样事务2 的更新就会阻塞,直到T4时刻事务1 commit释放锁.
 
-<img src="../02_图片/176.jpg" style="width:950px; height:500px"> 
+<img src="./02_图片/176.jpg" style="width:950px; height:500px"> 
 
 事务1将所有的行都加了写锁, 所以事务2在执行第一个 update 语句的时候就被锁住了. 需要等到 T4时刻 事务1 提交以后, 事务2 才能继续执行.
 
@@ -6460,7 +6461,7 @@ update user set age = 40 where id = 2 -- (2,"Jack",40)
 
 原因是: 在我们给数据库所有行 加锁的时候, id = 3这一行还不存在,数据库扫描不到,所以加不上锁.
 
-<img src="../02_图片/177.jpg" style="width:950px; height:500px"> 
+<img src="./02_图片/177.jpg" style="width:950px; height:500px"> 
 
 
 
@@ -6470,7 +6471,7 @@ update user set age = 40 where id = 2 -- (2,"Jack",40)
 
 这样 在执行 `select * from user where name = "Jack" for update` 的时候, 就不止给数据库中已有的n个记录加上了行锁,还同时增加了N+1个间隙锁,保护这个间隙，不允许插入值 (这两个合起来就是 Next-Key Lock临键锁).
 
-<img src="../02_图片/178.jpg" style="width:450px; height:250px"> 
+<img src="./02_图片/178.jpg" style="width:450px; height:250px"> 
 
  
 
@@ -6523,7 +6524,7 @@ InnoDB 的行级锁定状态变量不仅记录了锁定等待次数，还记录�
 - 乐观锁是相对于悲观锁而言的，它不是数据库提供的功能，需要开发者自己去实现。在数据库操作时，想法很乐观，认为这次的操作不会导致冲突，因此在数据库操作时并不做任何的特殊处理，即不加锁，而是在进行事务提交时再去判断是否有冲突了。
 
 
-<img src="../02_图片/171.jpg" style="width:650px; height:250px"> 
+<img src="./02_图片/171.jpg" style="width:650px; height:250px"> 
 
 
 
@@ -6554,7 +6555,7 @@ InnoDB 的行级锁定状态变量不仅记录了锁定等待次数，还记录�
 
 - 上述并发环境下，并发1在修改数据时，虽然还是3，但已经不是初始条件的3了，中间发生了A变B，B又变A的变化，此A已经非彼A，数据却成功修改，可能导致错误，这就是CAS引发的所谓的ABA问题。
 
-  <img src="../02_图片/172.jpg" style="width:650px; height:190px"> 
+  <img src="./02_图片/172.jpg" style="width:650px; height:190px"> 
 
 - 解决ABA问题的方法: 设计一个单独的可以顺序递增的version字段，每操作一次，将那条记录的版本号加 1. version 是用来查看被读的记录有无变化，作用是防止记录在业务处理期间被其他事务修改。以下单操作为例:
 
@@ -6584,7 +6585,7 @@ InnoDB引擎行锁是通过对索引数据页上的记录加锁实现的，主�
 - GapLock锁：间隙锁，锁定索引记录间隙(不包括记录本身)，确保索引记录的间隙不变。（范围锁，RR隔离级别支持）
 - Next-key Lock 锁：记录锁和间隙锁组合，同时锁住数据，并且锁住数据前后范围。（记录锁+范围锁，RR隔离级别支持）
 
-<img src="../02_图片/179.jpg" style="width:650px; height:200px"> 
+<img src="./02_图片/179.jpg" style="width:650px; height:200px"> 
 
 
 
@@ -6616,7 +6617,7 @@ MySQL支持MVCC多版本并发控制机制,MVCC机制最大的特点是实现了
 
 下面是一个update操作的具体流程:
 
-<img src="../02_图片/180.jpg" style="width:750px; height:400px">  
+<img src="./02_图片/180.jpg" style="width:750px; height:400px">  
 
 1. 当更新语句发送给MySQL后,MySQL Server会根据where条件, 读取第一个满足条件的记录,InnoDB引擎会将查询到的第一条记录返回,并加上锁(current read当前读) .
 2. MySQL Server收到这条加锁的记录后,会再发起一个Update请求,更新这条记录.
@@ -6633,7 +6634,7 @@ MySQL支持MVCC多版本并发控制机制,MVCC机制最大的特点是实现了
 - 增长阶段: 事务可以获得锁，但不能释放锁 ( 即在对任何数据进行读、写操作之前，首先要申请并获得对该数据的封锁 ).
 - 缩减阶段: 事务可以释放锁，但不能获得锁( 即在释放一个封锁之后，事务不再申请和获得其它任何封锁).
 
-<img src="../02_图片/181.jpg" style="width:700px; height:450px"> 
+<img src="./02_图片/181.jpg" style="width:700px; height:450px"> 
 
 从上图可以看出，2PL就是将加锁/解锁分为两个完全不相交的阶段. 加锁阶段：只加锁，不放锁. 解锁阶段：只放锁，不加锁.
 
@@ -6679,7 +6680,7 @@ delete from v1 where id = 10;
 
 当id是主键时, 只需要在该条SQL操作的数据记录上加写锁即可.
 
-<img src="../02_图片/202.jpg" style="width:550px; height:200px">  
+<img src="./02_图片/202.jpg" style="width:550px; height:200px">  
 
 
 
@@ -6689,7 +6690,7 @@ delete from v1 where id = 10;
 
 2. 同时会回表查询主键索引name=d的数据，并对name=d的数据也加上X锁。
 
-<img src="../02_图片/203.jpg" style="width:550px; height:350px"> 
+<img src="./02_图片/203.jpg" style="width:550px; height:350px"> 
 
 > 唯一索引与主键索引都需要加锁,因为如果在执行这条删除语句的时候,并发出现了一条更新语句,更新语句的where条件是name字段, 那么如果删除操作没有对主键索引加锁,那么更新语句不会知道有删除操作的存在从而进行更新,这样就违反了同一数据行上的写操作需要串行化执行的原则.
 
@@ -6700,7 +6701,7 @@ delete from v1 where id = 10;
 1. 对ID索引中符合条件的数据加上X锁。
 2. 再把对应的主键索引上的数据也加上X锁。
 
-<img src="../02_图片/204.jpg" style="width:550px; height:350px">	
+<img src="./02_图片/204.jpg" style="width:550px; height:350px">	
 
 > 与组合二的区别在于ID是非唯一索引的情况下,会对满足条件的多条数据都加上X锁。而组合二因为id是唯一索引列,所以只会对一条数据加上X锁。
 
@@ -6710,7 +6711,7 @@ delete from v1 where id = 10;
 
 由于没有索引，所以走的是全表扫描，所以会对主键索引上每一条记录施加X锁。
 
- <img src="../02_图片/205.jpg" style="width:550px; height:200px"> 
+ <img src="./02_图片/205.jpg" style="width:550px; height:200px"> 
 
 **为什么会对所有记录施加X锁，而不是表锁或者说符合条件的数据加X锁呢 ?**
 
@@ -6729,7 +6730,7 @@ delete from v1 where id = 10;
 - RC 级别下允许幻读的出现
 - RR级别不允许幻读的出现,InnoDB通过增加间隙锁来解决这个问题
 
-<img src="../02_图片/189.jpg" style="width:650px; height:450px"> 
+<img src="./02_图片/189.jpg" style="width:650px; height:450px"> 
 
 1. 首先对ID索引中符合条件的数据施加X锁。
 2. 对符合条件施加X锁的数据前后间隙施加间隙锁。
@@ -6740,7 +6741,7 @@ delete from v1 where id = 10;
 
 **组合八：ID无索引+RR级别**
 
-<img src="../02_图片/190.jpg" style="width:650px; height:450px"> 
+<img src="./02_图片/190.jpg" style="width:650px; height:450px"> 
 
 在Repeatable  Read隔离级别下，如果进行全表扫描的当前读，那么会锁上表中的所有记录，同时会锁上聚簇索引内的所有GAP，杜绝所有的并发 更新/删除/插入 操作。当然，也可以通过触发semi-consistent read，来缓解加锁开销与并发影响，但是semi-consistent read本身也会带来其他问题，不建议使用。
 
@@ -6772,7 +6773,7 @@ delete from t1 where pubtime > 1 and pubtime < 20 and userid = 'hdc'
 and comment is not null;
 ```
 
-<img src="../02_图片/206.jpg" style="width:850px; height:550px">   
+<img src="./02_图片/206.jpg" style="width:850px; height:550px">   
 
 分析SQL中的条件构成: 
 
@@ -6812,7 +6813,7 @@ and comment is not null;
 
 下面就是这条SQL的加锁情况:
 
-<img src="../02_图片/207.jpg" style="width:850px; height:550px"> 
+<img src="./02_图片/207.jpg" style="width:850px; height:550px"> 
 
 在RR隔离级别下 :
 
@@ -6868,7 +6869,7 @@ SQL语句中不要使用太复杂的关联多表的查询；使用explain“执�
 
 - 两个事务分别想拿到对方持有的锁，互相等待，于是产生死锁。
 
-<img src="../02_图片/194.jpg" style="width:650px; height:420px"> 
+<img src="./02_图片/194.jpg" style="width:650px; height:420px"> 
 
 
 
@@ -6879,7 +6880,7 @@ SQL语句中不要使用太复杂的关联多表的查询；使用explain“执�
 2. 事务2，从pubtime索引出发，[10,6],[100,1]均满足过滤条件，同样也会加**聚簇索引上的记录X锁**，加锁顺序为[6,hdc,10]，后[1,hdc,100]。
 3. 但是加锁时发现跟事务1的加锁顺序正好相反，两个Session恰好都持有了第一把锁，请求加第二把锁，死锁就发生了。
 
-<img src="../02_图片/208.jpg" style="width:650px; height:420px">  
+<img src="./02_图片/208.jpg" style="width:650px; height:420px">  
 
 **解决方案:** 如上面的原因2和原因3,  对索引加锁顺序的不一致很可能会导致死锁，所以如果可以，尽量以相同的顺序来访问索引记录和表。在程序以批量方式处理数据的时候，如果事先对数据排序，保证每个线程按固定的顺序来处理记录，也可以大大降低出现死锁的可能；
 
@@ -7005,7 +7006,7 @@ select
 from information_schema.innodb_trx;
 ```
 
-<img src="../02_图片/199.jpg" style="width:900px; height:100px"> 
+<img src="./02_图片/199.jpg" style="width:900px; height:100px"> 
 
 
 
@@ -7049,7 +7050,7 @@ from information_schema.innodb_locks;
 
 `lock_rec=4` 表示是对唯一索引进行的加锁.`lock_mode= X` 表示这里加的是X锁. 
 
-<img src="../02_图片/200.jpg" style="width:900px; height:100px"> 
+<img src="./02_图片/200.jpg" style="width:900px; height:100px"> 
 
 ```sql
 -- 查看锁等待的对应关系
@@ -7062,7 +7063,7 @@ select
 from information_schema.innodb_lock_waits;
 ```
 
-<img src="../02_图片/201.jpg" style="width:900px; height:100px"> 
+<img src="./02_图片/201.jpg" style="width:900px; height:100px"> 
 
 6) 事务2 执行删除操作,删除 id = 1的数据成功.
 
