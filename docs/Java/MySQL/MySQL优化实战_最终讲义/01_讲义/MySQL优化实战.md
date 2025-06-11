@@ -1,4 +1,4 @@
-**MySQL实战优化 ( 儒猿IT学习网 讲师: 若白 )**      
+**MySQL实战优化**      
 
 <img src="../02_图片/04.jpg" style="width:600px"> 
 
