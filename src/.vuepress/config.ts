@@ -4,7 +4,7 @@ import theme from "./theme.js";
 
 
 export default defineUserConfig({
-  base: "/",
+  base: "/note",
 
   lang: "zh-CN",
   title: "筆記本首頁",
