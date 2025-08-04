@@ -1,0 +1,279 @@
+<mxfile host="Electron" modified="2025-07-28T09:23:29.560Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.6.1 Chrome/124.0.6367.207 Electron/30.0.6 Safari/537.36" etag="ASb35fncjlYjauq2Neef" version="24.6.1" type="device">
+  <diagram name="第 1 页" id="R4P3tZovUA7cuwpGH3Ry">
+    <mxGraphModel dx="2046" dy="713" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-1" value="Server" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="-570" y="170" width="610" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-2" value="Client" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="1230" y="170" width="610" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="K5G_MMPCEBhUgQCX7xlR-3" target="K5G_MMPCEBhUgQCX7xlR-8" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-26" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="K5G_MMPCEBhUgQCX7xlR-3" target="K5G_MMPCEBhUgQCX7xlR-25" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-3" value="服务端网络处理类&lt;div&gt;NIOServerCnxnFactory&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="-555" y="500" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-6" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="K5G_MMPCEBhUgQCX7xlR-4" target="K5G_MMPCEBhUgQCX7xlR-3" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-470" y="480" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-7" value="工厂创建服务端网络处理类" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="K5G_MMPCEBhUgQCX7xlR-6" vertex="1" connectable="0">
+          <mxGeometry x="-0.16" y="4" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-4" value="ZkserverMain 类创建 网络连接工厂&lt;div&gt;ServerCnxnFactory&lt;br&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="-570" y="350" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-11" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="K5G_MMPCEBhUgQCX7xlR-8" target="K5G_MMPCEBhUgQCX7xlR-10" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-8" value="启动网络工厂&lt;div&gt;cnxnFactory.startup(zkServer)&lt;br&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="-572.5" y="680" width="225" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-16" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="K5G_MMPCEBhUgQCX7xlR-10" target="K5G_MMPCEBhUgQCX7xlR-15" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-10" value="工厂又会启动zk server&lt;div&gt;zks.startup();&lt;br&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="-542.5" y="830" width="165" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-12" value="org.apache.zookeeper.server.ZooKeeperServer#startup" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="-600" y="680" width="320" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-18" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="K5G_MMPCEBhUgQCX7xlR-15" target="K5G_MMPCEBhUgQCX7xlR-17" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-15" value="&lt;div&gt;设置网络处理&lt;/div&gt;&lt;div&gt;ZooKeeperServer#setupRequestProcessors&lt;br&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="-542.5" y="973" width="165" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-20" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="K5G_MMPCEBhUgQCX7xlR-17" target="K5G_MMPCEBhUgQCX7xlR-19" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-17" value="构成一个链式结构" style="whiteSpace=wrap;html=1;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="-542.5" y="1130.01" width="165" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-22" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="K5G_MMPCEBhUgQCX7xlR-19" target="K5G_MMPCEBhUgQCX7xlR-21" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-19" value="PrepRequestProcessor&lt;div&gt;既是处理器，又是一个线程&lt;/div&gt;" style="whiteSpace=wrap;html=1;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="-275" y="1130.01" width="195" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-24" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="K5G_MMPCEBhUgQCX7xlR-21" target="K5G_MMPCEBhUgQCX7xlR-23" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-21" value="SyncRequestProcessor&lt;div&gt;既是处理器，又是一个线程&lt;br&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="-275" y="1290" width="195" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-48" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="K5G_MMPCEBhUgQCX7xlR-23" target="K5G_MMPCEBhUgQCX7xlR-73" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1335.599853515625" y="1310" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-23" value="FinalRequestProcessor&lt;div&gt;只是处理器，处理上游委托的请求&lt;/div&gt;" style="whiteSpace=wrap;html=1;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="-275" y="1430" width="195" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-28" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="K5G_MMPCEBhUgQCX7xlR-25" target="K5G_MMPCEBhUgQCX7xlR-27" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-25" value="IO读写&lt;div&gt;NIOServerCnxnFactory.SelectorThread#select&lt;br&gt;&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="-230" y="475" width="140" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-30" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="K5G_MMPCEBhUgQCX7xlR-27" target="K5G_MMPCEBhUgQCX7xlR-29" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-27" value="&lt;div&gt;调度读写事件&lt;/div&gt;SelectorThread#handleIO" style="whiteSpace=wrap;html=1;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="50" y="500" width="180" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-32" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="K5G_MMPCEBhUgQCX7xlR-29" target="K5G_MMPCEBhUgQCX7xlR-31" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-29" value="多个work 走线程池&lt;div&gt;单个workService 直接读写&lt;/div&gt;" style="whiteSpace=wrap;html=1;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="55" y="580" width="170" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-34" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="K5G_MMPCEBhUgQCX7xlR-31" target="K5G_MMPCEBhUgQCX7xlR-33" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-31" value=".IOWorkRequest#doWork" style="whiteSpace=wrap;html=1;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="55" y="660" width="170" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-36" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="K5G_MMPCEBhUgQCX7xlR-33" target="K5G_MMPCEBhUgQCX7xlR-35" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-33" value="最后还是让连接管理器来读取&lt;div&gt;NIOServerCnxn#doIO&lt;br&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="55" y="740" width="170" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-38" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="K5G_MMPCEBhUgQCX7xlR-35" target="K5G_MMPCEBhUgQCX7xlR-37" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-35" value="&lt;div&gt;NIOServerCnxn#readPayload&lt;/div&gt;&lt;div&gt;readConnectRequest&lt;/div&gt;&lt;div&gt;readRequest()&lt;/div&gt;" style="rhombus;whiteSpace=wrap;html=1;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="30" y="817.5" width="220" height="102.5" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-40" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="K5G_MMPCEBhUgQCX7xlR-37" target="K5G_MMPCEBhUgQCX7xlR-39" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-37" value="ZooKeeperServer#processPacket" style="whiteSpace=wrap;html=1;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="35" y="943.63" width="210" height="58.75" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-42" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="K5G_MMPCEBhUgQCX7xlR-39" target="K5G_MMPCEBhUgQCX7xlR-41" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-39" value="将请求封包&lt;div&gt;交给&amp;nbsp;requestThrottler&lt;/div&gt;&lt;div&gt;请求限流器处理&lt;/div&gt;&lt;div&gt;其实就是一个队列&lt;/div&gt;" style="whiteSpace=wrap;html=1;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="80" y="1030.005" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-43" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="K5G_MMPCEBhUgQCX7xlR-41" target="K5G_MMPCEBhUgQCX7xlR-19" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-41" value="限流器又委托给&lt;div&gt;zk server 处理请求&lt;/div&gt;&lt;div&gt;zks.submitRequestNow(request);&lt;br&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="40" y="1130.01" width="200" height="59.99" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-44" value="将请求交给链式结构去处理！" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=16;fontStyle=1;horizontal=0;" parent="1" vertex="1">
+          <mxGeometry x="-130" y="1080" width="230" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-45" value="准备事务" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="-215" y="958" width="70" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-46" value="为事务写磁盘" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="-180" y="1110" width="100" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-47" value="实际处理逻辑" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="-166" y="1390" width="100" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-49" value="写回响应到客户端" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=16;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="350" y="1410" width="150" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-50" value="exist 请求" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="-60" y="1460" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-51" value="getChildren 请求" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="-75" y="1430" width="110" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-53" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="K5G_MMPCEBhUgQCX7xlR-52" target="K5G_MMPCEBhUgQCX7xlR-25" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-52" value="发送请求" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="1121" y="370" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-54" value="Java NIO" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=17;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="715" y="365" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-57" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="K5G_MMPCEBhUgQCX7xlR-55" target="K5G_MMPCEBhUgQCX7xlR-56" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-55" value="调用api&lt;div&gt;zk.exists(path, true);&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="1490" y="240" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-59" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="K5G_MMPCEBhUgQCX7xlR-56" target="K5G_MMPCEBhUgQCX7xlR-58" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-56" value="&lt;div&gt;创建请求命令&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="1490" y="335" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-62" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="K5G_MMPCEBhUgQCX7xlR-58" target="K5G_MMPCEBhUgQCX7xlR-61" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-80" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="K5G_MMPCEBhUgQCX7xlR-58" target="K5G_MMPCEBhUgQCX7xlR-81" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="2060" y="475" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-82" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;&lt;b&gt;阻塞等待响应结果&lt;/b&gt;&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="K5G_MMPCEBhUgQCX7xlR-80" vertex="1" connectable="0">
+          <mxGeometry x="0.19" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-58" value="&lt;div&gt;提交命令给网络管理器&lt;/div&gt;&lt;div&gt;cnxn.submitRequest&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="1480" y="450" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-60" value="ClientCnxn#submitReques" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="1550" y="410" width="170" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-64" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="K5G_MMPCEBhUgQCX7xlR-61" target="K5G_MMPCEBhUgQCX7xlR-63" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-61" value="&lt;div&gt;请求打包入队&lt;/div&gt;&lt;div&gt;outgoingQueue.add(packet)&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="1480" y="580" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-66" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="K5G_MMPCEBhUgQCX7xlR-63" target="K5G_MMPCEBhUgQCX7xlR-65" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-63" value="&lt;div&gt;发送线程将队列拷贝到clientCnxnSocket&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;SendThread#run&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+          <mxGeometry x="1445" y="660" width="210" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-67" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="K5G_MMPCEBhUgQCX7xlR-65" target="K5G_MMPCEBhUgQCX7xlR-52" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-70" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="K5G_MMPCEBhUgQCX7xlR-65" target="K5G_MMPCEBhUgQCX7xlR-69" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-72" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="K5G_MMPCEBhUgQCX7xlR-65" target="K5G_MMPCEBhUgQCX7xlR-71" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-65" value="&lt;div&gt;写&lt;/div&gt;&lt;div&gt;ClientCnxnSocketNIO#doTransport&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="1442.5" y="790" width="215" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-68" value="&lt;div&gt;&lt;span style=&quot;white-space-collapse: collapse;&quot;&gt;&amp;nbsp; &amp;nbsp; ExistsRequest request = new ExistsRequest();&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; request.setPath(serverPath);&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; request.setWatch(watcher != null);&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="1610" y="335" width="280" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-69" value="&lt;div&gt;写之后会将请求放入 paddingQueue中&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="1442.5" y="920" width="215" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-74" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="K5G_MMPCEBhUgQCX7xlR-71" target="K5G_MMPCEBhUgQCX7xlR-73" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-71" value="ClientCnxnSocketNIO#doIO" style="whiteSpace=wrap;html=1;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="1790" y="782.5" width="205" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-83" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="K5G_MMPCEBhUgQCX7xlR-73" target="K5G_MMPCEBhUgQCX7xlR-81" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-73" value="可读&lt;div&gt;使用发送线程进行读取&lt;/div&gt;&lt;div&gt;SendThread#readResponse&lt;br&gt;&lt;/div&gt;&lt;div&gt;然后将响应写回到 paddingQueue中的packet中&lt;/div&gt;" style="whiteSpace=wrap;html=1;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="1738.75" y="1410" width="307.5" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-75" value="写回响应到客户端" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=16;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="930" y="1410" width="150" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-76" value="写回响应到客户端" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=16;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="1390" y="1400" width="150" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-87" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" parent="1" source="K5G_MMPCEBhUgQCX7xlR-81" target="K5G_MMPCEBhUgQCX7xlR-55" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-81" value="等待响应" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="2110" y="445" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-85" value="写回服务器响应结果" style="text;html=1;align=center;verticalAlign=top;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=17;fontStyle=1;horizontal=0;" parent="1" vertex="1">
+          <mxGeometry x="2120" y="695" width="180" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-86" value="使用sendThread线程进行读写操作" style="text;html=1;align=center;verticalAlign=top;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=17;fontStyle=1;horizontal=0;" parent="1" vertex="1">
+          <mxGeometry x="1840" y="1020" width="40" height="270" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-88" value="写回请求结果" style="text;html=1;align=center;verticalAlign=top;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=17;fontStyle=1;horizontal=1;" parent="1" vertex="1">
+          <mxGeometry x="1885" y="230" width="130" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="K5G_MMPCEBhUgQCX7xlR-90" value="这里是个循环，一直循环读、写" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=#b85450;fillColor=#f8cecc;" parent="1" vertex="1">
+          <mxGeometry x="1455" y="840" width="190" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="hUGj6vEeUCuAl-GXAEVj-1" value="写回服务器响应结果" style="text;html=1;align=center;verticalAlign=top;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=17;fontStyle=1;horizontal=0;" vertex="1" parent="1">
+          <mxGeometry x="2130" y="998" width="180" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="hUGj6vEeUCuAl-GXAEVj-3" value="" style="curved=1;endArrow=classic;html=1;rounded=0;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.334;entryY=0.011;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="K5G_MMPCEBhUgQCX7xlR-69" target="K5G_MMPCEBhUgQCX7xlR-73">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1550" y="1080" as="sourcePoint" />
+            <mxPoint x="1660" y="1150" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="1600" y="1080" />
+              <mxPoint x="1690" y="1100" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
