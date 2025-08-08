@@ -13,7 +13,7 @@ export default hopeTheme({
 
   logo: "https://theme-hope-assets.vuejs.press/logo.svg",
 
-  repo: "vuepress-theme-hope/vuepress-theme-hope",
+  repo: "heihei180/note",
 
   docsDir: "src",
 
@@ -24,12 +24,13 @@ export default hopeTheme({
   sidebar:{
     "/note/": "structure",
 	"/Java/": "structure",
-
+	"/front/": "structure",
     "/bar/": "structure",
 	"/Python/": "structure",
 	"/cpp/": "structure",
 	"/csharp/": "structure",
 	"/toys/": "structure",
+	
     // fallback
     "/": ["" , "navigate" , "about" ],
   },
