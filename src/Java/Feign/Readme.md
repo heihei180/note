@@ -16,17 +16,25 @@ footer: false
 
 > 生产问题解决笔记
 
-因项目中不同服务互相调用，有时候遇见 spring 无法转换对象的问题，如果要查看原始的文本，还需要 将返回值设置成 Reponse
+因项目中不同服务互相调用，有时候遇见 spring 无法转换对象的问题，如果要查看原始的文本，还需要 将返回值设置成 Reponse 才能看，当然这种方式可以通过修改日志级别的方式解决
+还有一种情况： 
+	feignInterceptor: 这里给请求头上添加了   accept-encoding = br,gzip
 
-这里直接再转换的地方打个断点，直接看原始返回报文。
+然后出现无法正常转码的情况，这种情况也是无法处理的，除非你添加返回值的解码对象，默认支持 gzip 和另一种叫啥，但是不支持br这种，需要自己添加解码器。
 
-- 发送请求的组件： `SynchronousMethodHandler` 
+....
+## 处理办法
+
+直接再转换的地方打个断点，可以直接处理原始的流。
+
+发送请求的组件： `SynchronousMethodHandler` 
 
 
 逻辑 
 
-入口：feign.SynchronousMethodHandler#invoke
-发送请求： 执行发送请求和编码转换： feign.SynchronousMethodHandler#executeAndDecode
+- 入口：feign.SynchronousMethodHandler#invoke
+
+- 发送请求： 执行发送请求和编码转换： feign.SynchronousMethodHandler#executeAndDecode
 
 
 所以，直接给这里打断点就可以
