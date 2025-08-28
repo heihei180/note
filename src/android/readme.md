@@ -2,7 +2,7 @@
 home: false
 portfolio: false
 title: Android
-icon: icon-hhandroid
+icon: mdi:alien
 avatar: https://theme-hope-assets.vuejs.press/hero/conan.png
 
 titles:

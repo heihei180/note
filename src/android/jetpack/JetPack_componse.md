@@ -2,7 +2,6 @@
 home: false
 portfolio: false
 title: JetPack Componse
-icon: mdi:alien
 avatar: https://theme-hope-assets.vuejs.press/hero/conan.png
 
 titles:
@@ -10,7 +9,7 @@ titles:
   - feign
 footer: false
 ---
-
+fdsa 
 
 # jetpack
 - 生成项目
