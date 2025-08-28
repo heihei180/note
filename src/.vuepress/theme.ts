@@ -21,18 +21,19 @@ export default hopeTheme({
   navbar,
 
   // 侧边栏
-  sidebar:{
+  sidebar: {
     "/note/": "structure",
-	"/Java/": "structure",
-	"/front/": "structure",
+    "/Java/": "structure",
+    "/front/": "structure",
     "/bar/": "structure",
-	"/Python/": "structure",
-	"/cpp/": "structure",
-	"/csharp/": "structure",
-	"/toys/": "structure",
-	
+    "/Python/": "structure",
+    "/cpp/": "structure",
+    "/csharp/": "structure",
+    "/toys/": "structure",
+    "/android/": "structure",
+
     // fallback
-    "/": ["" , "navigate" , "about" ],
+    "/": ["", "navigate", "about"],
   },
 
   // 页脚
@@ -59,7 +60,7 @@ export default hopeTheme({
 
   // 此处开启了很多功能用于演示，你应仅保留用到的功能。
   markdown: {
-	alert: true,
+    alert: true,
     align: true,
     attrs: true,
     codeTabs: true,
