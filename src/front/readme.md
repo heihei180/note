@@ -1,7 +1,7 @@
 ---
 home: false
 portfolio: false
-title: Python
+title: 前端
 icon: tabler:file-type-html
 avatar: https://theme-hope-assets.vuejs.press/hero/conan.png
 
