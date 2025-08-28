@@ -2,7 +2,7 @@
 home: false
 portfolio: false
 title: OpenFeign
-icon: fluent-emoji-flat:a-button-blood-type
+icon: fluent-emoji-flat:baby-chick
 avatar: https://theme-hope-assets.vuejs.press/hero/conan.png
 
 titles:
