@@ -1,15 +1,17 @@
 ---
 home: false
 portfolio: false
-title: C#
-icon: tabler:brand-c-sharp
+title: Python
+icon: tabler:file-type-html
 avatar: https://theme-hope-assets.vuejs.press/hero/conan.png
 
 titles:
-  - c#
-  - csharp
+  - java
+  - jdk
+  - jvm
 footer: false
 ---
 
-# C#
-333ccc
+
+# Js note
+xx

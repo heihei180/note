@@ -1,3 +1,16 @@
+---
+home: false
+portfolio: false
+title: C++
+icon: tabler:brand-cpp
+avatar: https://theme-hope-assets.vuejs.press/hero/conan.png
+
+titles:
+  - c++
+  - cpp
+footer: false
+---
+
 # C++
 
  ![美女图片-1629700281.5043328](https://raw.githubusercontent.com/heihei180/temp_file/file/picgo/%E7%BE%8E%E5%A5%B3%E5%9B%BE%E7%89%87-1629700281.5043328.jpg)

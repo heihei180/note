@@ -1,3 +1,17 @@
+---
+home: false
+portfolio: false
+title: Java
+icon: tabler:coffee
+avatar: https://theme-hope-assets.vuejs.press/hero/conan.png
+
+titles:
+  - java
+  - jdk
+  - jvm
+footer: false
+---
+
 # Java
 
 
