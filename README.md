@@ -11,3 +11,9 @@ https://github.com/vuepress-theme-hope/vuepress-theme-hope
 https://theme-hope.vuejs.press/zh/guide/interface/icon.html
 
 - https://icon-sets.iconify.design/
+
+# install 
+
+`pnpm install`
+
+`pnpm docs:build`
