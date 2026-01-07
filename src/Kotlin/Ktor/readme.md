@@ -2,7 +2,7 @@
 home: false
 portfolio: false
 title: Ktor web技术
-icon: picon:kotlin
+icon: devicon:ktor
 avatar: https://theme-hope-assets.vuejs.press/hero/conan.png
 
 titles:
