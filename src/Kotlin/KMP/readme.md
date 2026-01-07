@@ -2,7 +2,7 @@
 home: false
 portfolio: false
 title: KMP技术笔记
-icon: simple-icons:kotlin
+icon: picon:kotlin
 avatar: https://theme-hope-assets.vuejs.press/hero/conan.png
 
 titles:
