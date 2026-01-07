@@ -66,6 +66,11 @@ highlights:
         details: 安卓代碼
         link: ./android/
 
+      - title: Kotlin
+        icon: simple-icons:kotlin
+        details: kotlin笔记，包含ktor,kmp等等..
+        link: ./Kotlin/
+
       - title: 自定义属性
         icon: code
         details: 为 Markdown 元素添加属性

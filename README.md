@@ -17,3 +17,8 @@ https://theme-hope.vuejs.press/zh/guide/interface/icon.html
 `pnpm install`
 
 `pnpm docs:build`
+
+# 本地启动
+```shell
+pnpm docs:dev
+```

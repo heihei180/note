@@ -31,6 +31,7 @@ export default hopeTheme({
     "/csharp/": "structure",
     "/toys/": "structure",
     "/android/": "structure",
+	"/Kotlin/":"structure",
 
     // fallback
     "/": ["", "navigate", "about"],
