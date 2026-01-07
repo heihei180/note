@@ -2,7 +2,7 @@
 home: false
 portfolio: false
 title: Ktor web技术
-icon: devicon:kotlin
+icon: simple-icons:kotlin
 avatar: https://theme-hope-assets.vuejs.press/hero/conan.png
 
 titles:
@@ -12,13 +12,8 @@ titles:
 footer: false
 ---
 
-# Java
-
-
-
-主要记录Kotlin技术笔记，包括Kotlin源码，基础代码分析，日常工作踩坑记录
-
-以及对各种中间件学习、源码记录、使用记录
+# Ktor 
+记录学习ktor中遇见的kt 高阶技术。
 
 <!-- 自動生成目錄 -->
 <!-- 用于限制高度 -->

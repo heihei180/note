@@ -1,7 +1,7 @@
 ---
 home: false
 portfolio: false
-title: Kotlin 索引
+title: Kotlin 学习笔记
 icon: simple-icons:kotlin
 avatar: https://theme-hope-assets.vuejs.press/hero/conan.png
 
@@ -18,7 +18,7 @@ footer: false
 
 主要记录Kotlin技术笔记，包括Kotlin源码，基础代码分析，日常工作踩坑记录
 
-以及对各种中间件学习、源码记录、使用记录
+主要记录学习的kt语法？？？
 
 <!-- 自動生成目錄 -->
 <!-- 用于限制高度 -->
