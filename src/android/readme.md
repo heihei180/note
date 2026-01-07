@@ -13,6 +13,12 @@ footer: false
 
 Android 笔记，可能会包含部分的kotlin
 
+Kotlin 相关代码：  
+
+<!-- (Kotlin)[../Kotlin/] -->
+
+[Kotlin](../Kotlin/readme.md)
+
 <!-- 自動生成目錄 -->
 <!-- 用于限制高度 -->
 <!-- 下面写文件夹路径就行！！！ -->
