@@ -7,7 +7,7 @@
 
 
 
-每个应用项目都必须在项目源代码集的根目录下有一个 AndroidManifest.xml 文件，且文件名精确无误。清单文件会向 Android 构建工具、Android 操作系统和 Google Play 描述有关应用的基本信息。
+每个应用项目都必须在项目源代码集的根目录下有一个 AndroidManifest 文件，且文件名精确无误。清单文件会向 Android 构建工具、Android 操作系统和 Google Play 描述有关应用的基本信息。
 
 清单文件必须声明以下内容（还有许多其他内容）：
 
