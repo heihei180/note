@@ -78,7 +78,7 @@ activity、服务和广播接收器由 intent 激活.
 当应用向系统发出某个 intent 时，系统会根据每个应用的清单文件中的 intent 过滤器声明来查找可以处理该 intent 的应用组件。系统会启动符合条件的组件的实例，并将 Intent 对象传递给该组件。**如果多个应用可以处理相应的 intent，则用户可以选择要使用哪个应用**
 
 
-一个应用组件可以具有任意多个 intent 过滤器（使用 <intent-filter> 元素定义），每个 intent 过滤器描述该组件的不同功能。
+一个应用组件可以具有任意多个 intent 过滤器（使用 `<intent-filter>` 元素定义），每个 intent 过滤器描述该组件的不同功能。
 
 文档：
 https://developer.android.com/guide/components/intents-filters?hl=zh-cn
